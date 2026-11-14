@@ -2,6 +2,8 @@
 
 把任意网页重新「建造」一遍的 Safari 扩展：页面先被清空，一群彩色光标当着你的面绘制选框、逐字键入、复制组件，最后落在真实网页上。
 
+App Store下载链接：https://apps.apple.com/app/id6832484055
+
 - iOS / iPadOS 15+，macOS 11+，visionOS 1.0+
 - Safari Web Extension + 原生 SwiftUI 设置 App（同一个工程）
 - 建造过程中页面始终可点击、可滚动、可输入
