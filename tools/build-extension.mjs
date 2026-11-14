@@ -248,6 +248,80 @@ const PATCHES = [
     });`,
   ],
   [
+    "overlay: pen paths never stretch across the page",
+    `      for (const it of E.editLines) {
+        const st = it.layer !== "world";
+        const pts = it.pts.slice(0, it.placed).map((p) => [X(p.x + it.dx, st), Y(p.y + it.dy, st)]);
+        const o = it.owner;
+        const all = o ? [...pts, [X(o.x, o.sticky), Y(o.y, o.sticky)]] : pts;
+        s += \`<polyline points="\${all.map((p) => p.join(",")).join(" ")}\${it.shut && pts[0] ? " " + pts[0].join(",") : ""}" fill="none" stroke="\${BLUE}" stroke-width="1.5"/>\`;
+        for (const p of pts) s += \`<circle cx="\${p[0]}" cy="\${p[1]}" r="3.6" fill="#fff" stroke="\${BLUE}" stroke-width="1.5"/>\`;
+      }`,
+    `      for (const it of E.editLines) {
+        const st = it.layer !== "world";
+        const raw = it.pts.slice(0, it.placed).map((p) => [X(p.x + it.dx, st), Y(p.y + it.dy, st)]);
+        const pts = raw.filter((p) => Number.isFinite(p[0]) && Number.isFinite(p[1]));
+        // A pen path is a chain of short steps. A jump several screens long means
+        // the geometry went stale (fast scroll, re-anchored item) and drawing it
+        // leaves a line dragged across the whole page.
+        const limit = Math.max(W, H) * 1.2;
+        const runs = [];
+        let cur = [];
+        for (const p of pts) {
+          if (cur.length && Math.hypot(p[0] - cur[cur.length - 1][0], p[1] - cur[cur.length - 1][1]) > limit) {
+            if (cur.length > 1) runs.push(cur);
+            cur = [];
+          }
+          cur.push(p);
+        }
+        if (cur.length > 1) runs.push(cur);
+        const o = it.owner;
+        if (o) {
+          const jx = X(o.x, o.sticky), jy = Y(o.y, o.sticky);
+          const tip = runs.length ? runs[runs.length - 1][runs[runs.length - 1].length - 1] : null;
+          if (tip && Number.isFinite(jx) && Number.isFinite(jy) && Math.hypot(jx - tip[0], jy - tip[1]) <= limit)
+            runs[runs.length - 1].push([jx, jy]);
+        }
+        for (const run of runs)
+          s += \`<polyline points="\${run.map((p) => p.join(",")).join(" ")}\${it.shut && run[0] ? " " + run[0].join(",") : ""}" fill="none" stroke="\${BLUE}" stroke-width="1.5"/>\`;
+        for (const p of pts) if (p[0] > -200 && p[0] < W + 200 && p[1] > -200 && p[1] < H + 200)
+          s += \`<circle cx="\${p[0]}" cy="\${p[1]}" r="3.6" fill="#fff" stroke="\${BLUE}" stroke-width="1.5"/>\`;
+      }`,
+  ],
+  [
+    "overlay: selection boxes with impossible geometry are not stroked",
+    `            const w = f1(v.b.w);
+            const h = f1(v.b.h);
+            const col = v.color === "red" ? RED : BLUE;
+            s += \`<rect x="\${x}" y="\${y}" width="\${w}" height="\${h}" fill="none" stroke="\${col}" stroke-width="1"/>\`;`,
+    `            const w = f1(v.b.w);
+            const h = f1(v.b.h);
+            const col = v.color === "red" ? RED : BLUE;
+            // A box is a frame around something on screen. If it is not finite or
+            // it is several screens wide, the anchor is stale: skip the stroke
+            // instead of drawing four lines across the page.
+            if (!Number.isFinite(x) || !Number.isFinite(y) || !(w > 0) || !(h > 0) || w > W * 3 || h > H * 3) continue;
+            s += \`<rect x="\${x}" y="\${y}" width="\${w}" height="\${h}" fill="none" stroke="\${col}" stroke-width="1"/>\`;`,
+  ],
+  [
+    "overlay: ruler connectors stay short instead of rubber-banding",
+    `            if (v.rulerLines && rt > 0.05)
+              s += \`<g stroke="\${BLUE}" stroke-width="1" stroke-dasharray="2 2" opacity="\${f1(rt)}"><line x1="\${RULER}" x2="\${x}" y1="\${f1(y + h / 2)}" y2="\${f1(y + h / 2)}"/><line x1="\${f1(x + w / 2)}" x2="\${f1(x + w / 2)}" y1="\${RULER}" y2="\${y}"/></g>\`;`,
+    `            // A ruler connector is a short pointer, not a rubber band. When the
+            // box is far from the ruler (fast scroll, off-screen anchor) the two
+            // lines used to stretch across the whole page and look like a
+            // rendering fault dragged along by the cursor.
+            if (v.rulerLines && rt > 0.05) {
+              const cx = f1(x + w / 2), cy = f1(y + h / 2);
+              const nearX = Math.abs(x - RULER) < 150;
+              const nearY = Math.abs(y - RULER) < 150;
+              let seg = "";
+              if (nearX) seg += \`<line x1="\${RULER}" x2="\${f1(x)}" y1="\${cy}" y2="\${cy}"/>\`;
+              if (nearY) seg += \`<line x1="\${cx}" x2="\${cx}" y1="\${RULER}" y2="\${f1(y)}"/>\`;
+              if (seg) s += \`<g stroke="\${BLUE}" stroke-width="1" stroke-dasharray="2 2" opacity="\${f1(rt)}">\${seg}</g>\`;
+            }`,
+  ],
+  [
     "api: expose restart so SPA route changes can rebuild the view",
     `    toggle() {\n      if (app) stop(false);\n      else start();\n    },`,
     `    restart,\n    toggle() {\n      if (app) stop(false);\n      else start();\n    },`,

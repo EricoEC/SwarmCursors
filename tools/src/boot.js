@@ -111,10 +111,23 @@
       for(const it of itemsOf(t))referenced.add(it);
       if(t.spec.type==='dup')for(const it of t.spec.g.src.items)referenced.add(it);
     }
+    // Paint order, not task order. Items carry the model's stacking key; the
+    // clone surface is a DOM tree, so a node appended late paints on top. A
+    // background image whose task happened to be created last used to land
+    // above the buttons that sit on it. Inserting by key keeps the overlay in
+    // the same back-to-front order the page itself uses.
+    const place=(layerEl,it,node)=>{
+      node.__swarmKey=it.key;
+      for(const c of layerEl.children){
+        if(c.__swarmKey==null)continue;
+        if(c.__swarmKey>it.key){layerEl.insertBefore(node,c);return;}
+      }
+      layerEl.appendChild(node);
+    };
     for(const it of referenced) {
       it.nativeSkip=!it.nativeTokens?.length;
       const node=app.view.makeNode(it);
-      if(!it.nativeSkip){(it.layer==='world'?app.view.world:app.view[it.layer]).append(node);E.items.push(it);}
+      if(!it.nativeSkip){place(it.layer==='world'?app.view.world:app.view[it.layer],it,node);E.items.push(it);}
       addGeometry(E,it);
     }
     for(const g of model.groups) {

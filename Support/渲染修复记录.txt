@@ -1,0 +1,20 @@
+2026-11-14：两项渲染修复记录。
+
+一、标尺连接线不再“橡皮筋”
+rulerLines 的横向/纵向引导线原来无条件从标尺拉到选框。当选框离标尺很远时（快速上滑、锚点滚出视口），
+两条虚线会横跨整屏并跟着光标拖动，看起来像渲染错误。现在只有选框距标尺 150px 以内才画对应方向的那条线，
+否则该方向不画，坐标统一走 f1()。构建补丁 #50。
+
+二、叠放顺序跟随绘制顺序，而不是任务顺序
+clone 层本身是 DOM，后 append 的节点画在上面。v1.0 的增量发现把节点按“任务创建顺序”append，
+如果某个背景图的 item 排在按钮之后被发现，它就会盖住按钮。现在插入时按模型堆叠键 it.key 归位：
+找到第一个 key 更大的兄弟节点并 insertBefore；增量新增走同一条路径。文件 tools/src/boot.js。
+
+验证
+  node tools/tests/visual-fidelity.cjs    PASS（五个生成器 + 建议列表 + 30 次弹窗替换）
+  node tools/tests/adaptive-workers.cjs   PASS（自动峰值 11 / 手动 30 / 巡航保留）
+  node tools/tests/ancestor-handoff.cjs   PASS
+  node tools/tests/switch-regression.mjs  PASS（OFF 持久化 / service worker 重启 / 竞态串行化）
+  叠放探针：shadow 内 world 层 8 个节点 key 升序 [12, 5000002, 5000003, 5000005, 55000007, ...]，
+  背景 key 小于按钮 key，背景先绘制。
+  安装包与源码 SHA256 四项一致；codesign --verify --deep --strict 通过；pluginkit 仅注册一个扩展。
