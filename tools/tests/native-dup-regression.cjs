@@ -1,0 +1,22 @@
+const fs=require('fs'),path=require('path'),assert=require('assert/strict');
+const {webkit}=require('/Users/erico/.nvm/versions/node/v22.22.1/lib/node_modules/playwright');
+(async()=>{const browser=await webkit.launch();try{
+ const p=await browser.newPage({viewport:{width:1200,height:800}});const errors=[];p.on('pageerror',e=>errors.push(String(e)));
+ await p.addInitScript(()=>{window.browser={runtime:{sendMessage:(m,cb)=>{const s={agents:8,autoAgents:false,speed:1,sound:false,enabled:true};cb?.(s);return Promise.resolve(s)},onMessage:{addListener(){}}},storage:{local:{get:async()=>({})}}};});
+ const image=i=>'data:image/svg+xml,'+encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" width="90" height="70"><rect width="90" height="70" fill="${['red','blue','green','orange','pink','purple'][i%6]}"/></svg>`);
+ const card=i=>`<article class="card" id="c${i}"><img width="90" height="70" src="${image(i)}"><p>卡片标题 ${i}</p></article>`;
+ await p.goto('data:text/html,'+encodeURIComponent('<style>.row{display:flex;gap:8px}.card{width:120px;background:#ddd;padding:8px}p{margin:4px;font:16px sans-serif}</style><section class="row">'+Array.from({length:6},(_,i)=>card(i)).join('')+'</section>'));
+ for(const n of ['mask','swarm'])await p.addScriptTag({content:fs.readFileSync(path.resolve(__dirname,'../../web-extension/content/'+n+'.js'),'utf8')});
+ await p.waitForFunction(()=>__swarmRebuild.app?.engine.cursors.some(c=>c.task?.spec.type==='dup'),{},{timeout:20000});
+ await p.evaluate(({src})=>{document.querySelector('#c0').remove();document.querySelector('#c3 img').src=src;document.querySelector('#c3 p').textContent='绘制过程中更新的标题';},{src:image(5)});
+ await p.waitForFunction(()=>__swarmRebuild.app.complete&&[...document.querySelectorAll('.card,.card *')].every(e=>!e.hasAttribute('data-swarm-pending')),{},{timeout:30000});
+ console.log('PASS removed master and changed destination recover through original tasks without hidden contents');
+ const previous=await p.evaluate(()=>new Set(__swarmRebuild.app.engine.tasks.map(t=>t.id)));
+ const before=await p.evaluate(()=>Math.max(-1,...__swarmRebuild.app.engine.tasks.map(t=>t.id)));
+ await p.evaluate(html=>document.querySelector('.row').insertAdjacentHTML('beforeend',html),card(6));
+ await p.waitForFunction(()=>document.querySelector('#c6 p').classList.contains('__swarm-drawn'),{},{timeout:20000});
+ const tasks=await p.evaluate(before=>__swarmRebuild.app.engine.tasks.filter(t=>t.id>before).map(t=>t.spec.type),before);
+ assert(tasks.includes('dup'),JSON.stringify(tasks));assert(tasks.includes('edit'),JSON.stringify(tasks));
+ console.log('PASS newly inserted sibling reuses a completed master through original dup/edit tasks');
+ assert.deepEqual(errors,[]);
+}finally{await browser.close()}})().catch(e=>{console.error(e);process.exit(1)});

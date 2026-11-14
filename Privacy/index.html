@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy</title>
+
+    <script>
+        // Use the browser's primary language; all non-Simplified Chinese locales use English.
+        const browserLanguage = (navigator.language || navigator.languages?.[0] || "en").replace(/_/g, "-");
+        const simplifiedChinese = /^zh(?:-|$)/i.test(browserLanguage)
+            && !/-Hant(?:-|$)/i.test(browserLanguage)
+            && /-(?:Hans|CN|SG)(?:-|$)/i.test(browserLanguage);
+        document.documentElement.lang = simplifiedChinese ? "zh-CN" : "en";
+    </script>
+
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        h1 {
+            color: #000;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+        }
+
+        .date {
+            color: #666;
+            font-size: .9em;
+        }
+
+        .footer {
+            margin-top: 40px;
+            font-size: .8em;
+            color: #999;
+            border-top: 1px solid #eee;
+            padding-top: 20px;
+        }
+
+        [data-language] { display: none; }
+        html[lang="en"] [data-language="en"],
+        html[lang="zh-CN"] [data-language="zh-CN"] { display: block; }
+        .language-bar { display: flex; justify-content: flex-end; }
+        .language-toggle {
+            font: inherit;
+            color: inherit;
+            background: #fff;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            padding: 6px 12px;
+            cursor: pointer;
+        }
+        .language-toggle:focus-visible { outline: 2px solid #0066cc; outline-offset: 3px; }
+    </style>
+
+</head>
+
+<body>
+<div class="language-bar">
+    <button id="language-toggle" class="language-toggle" type="button" lang="zh-CN" aria-label="Switch to 简体中文">简体中文</button>
+</div>
+<main>
+<section data-language="en" lang="en">
+<h1>Privacy Policy</h1>
+<p class="date">Effective date: November 9, 2026</p>
+<p>Swarm Cursors is developed by Erico. This policy explains how the app and its Safari extension handle information when providing webpage animations, settings, and previews.</p>
+<h2>1. Information Handling Principles</h2>
+<p>Swarm Cursors does not require registration or sign-in. It does not upload webpage content or personal information to developer servers, sell personal data, or use user information for advertising, behavioral analytics, or cross-site tracking.</p>
+<h2>2. Local Processing of Webpage Content</h2>
+<p>After you enable the extension and grant website access, it reads page structure, text, styles, and element positions on permitted webpages and related embedded frames to arrange cursor movement, render animations, and progressively reveal page content.</p>
+<p>This content is used only for on-device animation processing. The app does not persist it as browsing history or webpage archives or send it to the developer. Saved preferences do not contain webpage text, form entries, or website account information.</p>
+<h2>3. Locally Stored Settings</h2>
+<p>The app and extension store the following information on your device to retain preferences and synchronize their state:</p>
+<ul>
+<li>Animation speed.</li>
+<li>Automatic cursor allocation and manual cursor count.</li>
+<li>Sound and webpage animation switches.</li>
+<li>App language and synchronization state, such as settings update timestamps.</li>
+</ul>
+<p>This information is exchanged between the app and its extension through system-provided local storage, shared containers, or on-device messaging. It is not transmitted over the network to developer servers. You can adjust settings in the app and disable the extension or revoke website access in Safari.</p>
+<h2>4. Permission Purposes</h2>
+<ul>
+<li><strong>Website access:</strong> Reads the layout and content of permitted webpages and controls animated element visibility. You manage access in Safari.</li>
+<li><strong>Extension storage:</strong> Saves preferences and switch state.</li>
+<li><strong>Active tab access:</strong> Responds to extension actions on the current page, subject to Safari permission controls.</li>
+<li><strong>Native messaging:</strong> Exchanges settings between the app and its Safari extension.</li>
+</ul>
+<p>Animation sounds are synthesized locally. No recording or microphone permission is required. The app's core features do not require camera, contacts, photos, or location permissions.</p>
+<h2>5. Network Access and Third-Party Content</h2>
+<p>Animation processing does not depend on developer servers, and the app does not integrate advertising or analytics services. Websites you visit continue to load images, videos, and other network resources as part of their own functionality. Their information handling is governed by their respective privacy policies.</p>
+<p>If you choose to open an external link in the app, the destination website may process access data under its own policy. This is separate from local webpage animation processing.</p>
+<h2>6. Support and Feedback</h2>
+<p>If you send a support email, we receive the email address, issue description, and attachments you provide and use them only to address your inquiry. Do not include passwords, verification codes, or sensitive information unrelated to the issue.</p>
+<h2>7. Children's Privacy</h2>
+<p>The app does not include features for collecting children's information and does not transmit children's personal information to the developer through its animation features. For questions about information handling, contact the developer using the email address below.</p>
+<h2>8. Policy Updates</h2>
+<p>If information handling practices change, we will update this policy and its effective date. Where separate notice or consent is required by applicable law, we will follow those requirements.</p>
+<h2>9. Contact</h2>
+<p>For questions about this policy or information handling, contact <a href="mailto:erico525@163.com">erico525@163.com</a>.</p>
+</section>
+<section data-language="zh-CN" lang="zh-CN">
+<h1>隐私政策</h1>
+<p class="date">生效日期：2026 年 11 月 9 日</p>
+<p>Swarm Cursors 由 Erico 开发。本政策说明应用及其 Safari 扩展在提供网页动画、设置管理与预览功能时的信息处理方式。</p>
+
+<h2>一、信息处理原则</h2>
+<p>Swarm Cursors 无需注册或登录，不向开发者服务器上传网页内容或个人信息，不出售用户个人数据，也不将用户信息用于广告投放、行为分析或跨网站追踪。</p>
+
+<h2>二、网页内容的本地处理</h2>
+<p>在您启用扩展并授予网站访问权限后，扩展会在获准访问的网页及相关嵌入页面中读取页面结构、文字、样式与元素位置，用于安排光标运动、绘制动画及逐步显示页面内容。</p>
+<p>上述内容仅用于设备上的动画处理，不作为浏览记录或网页档案由本应用持久保存，也不会发送给开发者。本应用保存的偏好设置不包含网页正文、表单输入或网站账号信息。</p>
+
+<h2>三、本地保存的设置</h2>
+<p>应用及扩展在设备本地保存以下信息，以保留使用偏好并同步运行状态：</p>
+<ul>
+    <li>动画速度。</li>
+    <li>光标自动分配选项及手动数量。</li>
+    <li>声音开关与网页绘制开关。</li>
+    <li>应用语言及设置同步所需的更新时间等状态信息。</li>
+</ul>
+<p>这些信息通过系统提供的本地存储、共享容器或本机消息通道在应用及其扩展之间交换，不构成向开发者服务器的网络传输。您可以在应用中调整设置，并在 Safari 中停用扩展或撤销网站访问权限。</p>
+
+<h2>四、权限用途</h2>
+<ul>
+    <li><strong>网站访问：</strong>用于读取获准网页的布局与内容，并控制页面元素的动画显示。访问范围由您在 Safari 中管理。</li>
+    <li><strong>扩展存储：</strong>用于保存偏好设置与开关状态。</li>
+    <li><strong>当前标签页访问：</strong>用于响应您对当前页面的扩展操作，具体访问能力受 Safari 权限控制。</li>
+    <li><strong>本机通信：</strong>用于应用与其 Safari 扩展之间交换设置。</li>
+</ul>
+<p>动画音效在设备本地合成，不需要录音，也不申请麦克风权限。本应用的核心功能不需要相机、通讯录、照片或定位权限。</p>
+
+<h2>五、网络与第三方内容</h2>
+<p>动画处理不依赖开发者服务器，应用不集成广告或统计分析服务。您访问的网站仍会按其自身功能加载图片、视频及其他网络资源，相关信息处理适用该网站的隐私政策。</p>
+<p>如果您主动打开应用中的外部链接，目标网站可能依据其政策处理访问数据。该行为与网页动画的本地处理相互独立。</p>
+
+<h2>六、支持与反馈</h2>
+<p>如果您主动发送支持邮件，我们会收到您提供的邮箱地址、问题描述及附件，并仅用于处理相应咨询。请勿在反馈中提供密码、验证码或其他与问题无关的敏感信息。</p>
+
+<h2>七、儿童隐私</h2>
+<p>本应用不设置儿童信息收集功能，也不通过动画功能向开发者传输儿童个人信息。如您对相关信息处理有疑问，可通过下方邮箱联系开发者。</p>
+
+<h2>八、政策更新</h2>
+<p>如果信息处理方式发生变化，我们会更新本政策并标注生效日期。涉及依法需要另行告知或取得同意的事项，将按适用要求处理。</p>
+
+<h2>九、联系方式</h2>
+<p>如对本政策或信息处理方式有疑问，请联系：<a href="mailto:erico525@163.com">erico525@163.com</a>。</p>
+</section>
+</main>
+<footer class="footer">Copyright © 2026 Erico. All Rights Reserved.</footer>
+<script>
+    const languageToggle = document.getElementById("language-toggle");
+    function updateLanguage(language) {
+        document.documentElement.lang = language;
+        const chinese = language === "zh-CN";
+        document.title = document.querySelector('[data-language="' + language + '"] h1').textContent;
+        languageToggle.textContent = chinese ? "English" : "简体中文";
+        languageToggle.lang = chinese ? "en" : "zh-CN";
+        languageToggle.setAttribute("aria-label", chinese ? "切换到 English" : "Switch to 简体中文");
+    }
+    languageToggle.addEventListener("click", () => {
+        updateLanguage(document.documentElement.lang === "en" ? "zh-CN" : "en");
+    });
+    updateLanguage(document.documentElement.lang);
+</script>
+</body>
+</html>

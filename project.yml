@@ -1,0 +1,100 @@
+name: SwarmCursors
+options:
+  bundleIdPrefix: com.Erico
+  developmentLanguage: en
+  createIntermediateGroups: true
+  groupSortPosition: top
+  deploymentTarget:
+    iOS: "15.0"
+    macOS: "11.0"
+    visionOS: "1.0"
+
+settings:
+  base:
+    MARKETING_VERSION: "1.0"
+    CURRENT_PROJECT_VERSION: "1"
+    SWIFT_VERSION: "5.0"
+    CODE_SIGN_STYLE: Automatic
+    DEVELOPMENT_TEAM: Q42CQ5VP5A
+    SWIFT_EMIT_LOC_STRINGS: YES
+    ENABLE_USER_SCRIPT_SANDBOXING: YES
+
+targets:
+  SwarmCursors:
+    type: application
+    supportedDestinations: [iOS, macOS, visionOS]
+    sources:
+      - path: App
+      # Icon Composer document lives at the project root; referenced here so it
+      # stays where it was designed rather than inside the sources folder.
+      - path: AppIcon.icon
+        buildPhase: resources
+    info:
+      path: App/Info.plist
+      properties:
+        CFBundleDisplayName: Swarm Cursors
+        CFBundleName: Swarm Cursors
+        ITSAppUsesNonExemptEncryption: false
+        LSApplicationCategoryType: public.app-category.productivity
+        UILaunchScreen: {}
+        UISupportedInterfaceOrientations:
+          - UIInterfaceOrientationPortrait
+          - UIInterfaceOrientationLandscapeLeft
+          - UIInterfaceOrientationLandscapeRight
+        UISupportedInterfaceOrientations~ipad:
+          - UIInterfaceOrientationPortrait
+          - UIInterfaceOrientationPortraitUpsideDown
+          - UIInterfaceOrientationLandscapeLeft
+          - UIInterfaceOrientationLandscapeRight
+        UIApplicationSceneManifest:
+          UIApplicationSupportsMultipleScenes: false
+          UISceneConfigurations:
+            UIWindowSceneSessionRoleApplication:
+              - UISceneConfigurationName: Default Configuration
+                UISceneDelegateClassName: $(PRODUCT_MODULE_NAME).SceneDelegate
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.Erico.SwarmCursors
+        PRODUCT_NAME: Swarm Cursors
+        CODE_SIGN_ENTITLEMENTS: App/SwarmCursors.entitlements
+        ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME: AccentColor
+        TARGETED_DEVICE_FAMILY: "1,2,6,7"
+    dependencies:
+      - target: SwarmCursorsExtension
+        embed: true
+        codeSign: true
+
+  SwarmCursorsExtension:
+    type: app-extension
+    supportedDestinations: [iOS, macOS, visionOS]
+    sources:
+      - path: Extension
+      - path: web-extension/manifest.json
+        buildPhase: resources
+      - path: web-extension/background.js
+        buildPhase: resources
+      - path: web-extension/content
+        type: folder
+        buildPhase: resources
+      - path: web-extension/icons
+        type: folder
+        buildPhase: resources
+      - path: web-extension/_locales
+        type: folder
+        buildPhase: resources
+    info:
+      path: Extension/Info.plist
+      properties:
+        CFBundleDisplayName: Swarm Cursors Extension
+        CFBundleShortVersionString: "1.0"
+        NSExtension:
+          NSExtensionPointIdentifier: com.apple.Safari.web-extension
+          NSExtensionPrincipalClass: $(PRODUCT_MODULE_NAME).SafariWebExtensionHandler
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.Erico.SwarmCursors.Extension
+        PRODUCT_NAME: Swarm Cursors Extension
+        CODE_SIGN_ENTITLEMENTS: Extension/SwarmCursorsExtension.entitlements
+        SKIP_INSTALL: YES
+        APPLICATION_EXTENSION_API_ONLY: YES
+        TARGETED_DEVICE_FAMILY: "1,2,6,7"

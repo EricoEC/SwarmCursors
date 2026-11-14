@@ -1,0 +1,572 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		041F4E5DB811F24E256312B3 /* SwarmCursorsExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 4E505C3CB693574938CD33E0 /* SwarmCursorsExtension.appex */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		076384A12185F665BB0464A1 /* Design.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D9353851186FE42341E46E2 /* Design.swift */; };
+		0881DECE565F12094AD6D7D6 /* SafariWebExtensionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = C715FC2D5B7D808E9E74F546 /* SafariWebExtensionHandler.swift */; };
+		0ADDE207536DC167E576736D /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5A967AFC60FCF9710881580 /* RootView.swift */; };
+		264BF5A550D2ED6FE1F59F9D /* SwarmCursorsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70058C8194E05A621306698F /* SwarmCursorsApp.swift */; };
+		3704ACF8923D1DFC650D174D /* GuideView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F73950594754447CDEC2035C /* GuideView.swift */; };
+		5BCB42D969F7BCC6D3D2A259 /* AppIcon.icon in Resources */ = {isa = PBXBuildFile; fileRef = 6E97FCFF6639DD5F30234483 /* AppIcon.icon */; };
+		74906CAC6B0A4FC2D3A130AD /* _locales in Resources */ = {isa = PBXBuildFile; fileRef = 5AFC90FC6EB788D77B389045 /* _locales */; };
+		7D96B1137102C31B189C4431 /* swarm-mini.html in Resources */ = {isa = PBXBuildFile; fileRef = 9805E36D70177E4B4D77F1B6 /* swarm-mini.html */; };
+		84B7290C7FB2295DF4E64AAE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C03DB1E766D40A1B61BDF56B /* Assets.xcassets */; };
+		8854BBCC10E174EFB9B2DD98 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E117A5612FE646A44671E1EB /* Localizable.strings */; };
+		AD0087093150F0DEAE1A84BA /* SwarmSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51BE3C21201AC610EBB9F58 /* SwarmSettings.swift */; };
+		C9B569733235FAEA62A258F1 /* manifest.json in Resources */ = {isa = PBXBuildFile; fileRef = 14274D7AA3CC578CF5AC9B1D /* manifest.json */; };
+		DA432EFA799B5089C6F498ED /* Compat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD518DF1FECFFA3AFE155C5 /* Compat.swift */; };
+		DC5BE0D89B3D7C2713B1A44A /* icons in Resources */ = {isa = PBXBuildFile; fileRef = 8E0B6057FF900D34DEE93C22 /* icons */; };
+		E0D40F734867F98B26D97F5E /* background.js in Resources */ = {isa = PBXBuildFile; fileRef = E489A88314942986FC9184CF /* background.js */; };
+		E516E016FF0155DA2DCF725B /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 617F9856A903349475D7E387 /* AboutView.swift */; };
+		F73DC5430D291E9F648489F9 /* PreviewWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3FEBF12AA807DC3A145309C /* PreviewWebView.swift */; };
+		F852B33861C13FB8C9F97551 /* StudioView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B677D02166AC676ABC8E7B4 /* StudioView.swift */; };
+		FD24DF3A9D393E7EB4744766 /* content in Resources */ = {isa = PBXBuildFile; fileRef = 8A2817B94F6506853FC3613F /* content */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		05C1EDACD1DE38433B3694FB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 824916B7D7D83104D4948B1F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 7B05E6C69E2FF5F69C40631E;
+			remoteInfo = SwarmCursorsExtension;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		B264D06374B30D3F7CE9C021 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				041F4E5DB811F24E256312B3 /* SwarmCursorsExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		14274D7AA3CC578CF5AC9B1D /* manifest.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = manifest.json; sourceTree = "<group>"; };
+		1900CE2739E1B823A073EEFE /* SwarmCursors.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; name = SwarmCursors.app; path = "Swarm Cursors.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3D9353851186FE42341E46E2 /* Design.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Design.swift; sourceTree = "<group>"; };
+		4E505C3CB693574938CD33E0 /* SwarmCursorsExtension.appex */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = "wrapper.extensionkit-extension"; name = SwarmCursorsExtension.appex; path = "Swarm Cursors Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		5AFC90FC6EB788D77B389045 /* _locales */ = {isa = PBXFileReference; lastKnownFileType = folder; name = _locales; path = "web-extension/_locales"; sourceTree = SOURCE_ROOT; };
+		5B8F4F0B7849CFA47E4B6B15 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		617F9856A903349475D7E387 /* AboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
+		66745079928602E1B20C02FA /* SwarmCursorsExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SwarmCursorsExtension.entitlements; sourceTree = "<group>"; };
+		6E97FCFF6639DD5F30234483 /* AppIcon.icon */ = {isa = PBXFileReference; lastKnownFileType = folder.iconcomposer.icon; path = AppIcon.icon; sourceTree = "<group>"; };
+		70058C8194E05A621306698F /* SwarmCursorsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwarmCursorsApp.swift; sourceTree = "<group>"; };
+		7016DA6B204BE4881967D596 /* SwarmCursors.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SwarmCursors.entitlements; sourceTree = "<group>"; };
+		7CD518DF1FECFFA3AFE155C5 /* Compat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Compat.swift; sourceTree = "<group>"; };
+		8A2817B94F6506853FC3613F /* content */ = {isa = PBXFileReference; lastKnownFileType = folder; name = content; path = "web-extension/content"; sourceTree = SOURCE_ROOT; };
+		8E0B6057FF900D34DEE93C22 /* icons */ = {isa = PBXFileReference; lastKnownFileType = folder; name = icons; path = "web-extension/icons"; sourceTree = SOURCE_ROOT; };
+		9805E36D70177E4B4D77F1B6 /* swarm-mini.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = "swarm-mini.html"; sourceTree = "<group>"; };
+		9B677D02166AC676ABC8E7B4 /* StudioView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudioView.swift; sourceTree = "<group>"; };
+		A0BFABFFA16AD4E932533BEE /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		A51BE3C21201AC610EBB9F58 /* SwarmSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwarmSettings.swift; sourceTree = "<group>"; };
+		AF3E32ABEC3728F9DD66740C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		C03DB1E766D40A1B61BDF56B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		C715FC2D5B7D808E9E74F546 /* SafariWebExtensionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariWebExtensionHandler.swift; sourceTree = "<group>"; };
+		C908A2983B355965C735F696 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		E3FEBF12AA807DC3A145309C /* PreviewWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewWebView.swift; sourceTree = "<group>"; };
+		E489A88314942986FC9184CF /* background.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = background.js; sourceTree = "<group>"; };
+		F5A967AFC60FCF9710881580 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
+		F73950594754447CDEC2035C /* GuideView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuideView.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		50F312A18B5676069BBCF26A /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				9805E36D70177E4B4D77F1B6 /* swarm-mini.html */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		7A14541F04CEB5B93AE26568 = {
+			isa = PBXGroup;
+			children = (
+				6E97FCFF6639DD5F30234483 /* AppIcon.icon */,
+				A5309AB2B0AB0AD0B603AEA0 /* App */,
+				E79A5419F22711B77FC615F8 /* Extension */,
+				E6D904A4F3B6C010DD232F06 /* web-extension */,
+				B2B0519161B67D2B9999FA2C /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		A5309AB2B0AB0AD0B603AEA0 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				E117A5612FE646A44671E1EB /* Localizable.strings */,
+				50F312A18B5676069BBCF26A /* Resources */,
+				617F9856A903349475D7E387 /* AboutView.swift */,
+				C03DB1E766D40A1B61BDF56B /* Assets.xcassets */,
+				7CD518DF1FECFFA3AFE155C5 /* Compat.swift */,
+				3D9353851186FE42341E46E2 /* Design.swift */,
+				F73950594754447CDEC2035C /* GuideView.swift */,
+				AF3E32ABEC3728F9DD66740C /* Info.plist */,
+				E3FEBF12AA807DC3A145309C /* PreviewWebView.swift */,
+				F5A967AFC60FCF9710881580 /* RootView.swift */,
+				9B677D02166AC676ABC8E7B4 /* StudioView.swift */,
+				7016DA6B204BE4881967D596 /* SwarmCursors.entitlements */,
+				70058C8194E05A621306698F /* SwarmCursorsApp.swift */,
+				A51BE3C21201AC610EBB9F58 /* SwarmSettings.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		B2B0519161B67D2B9999FA2C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				1900CE2739E1B823A073EEFE /* SwarmCursors.app */,
+				4E505C3CB693574938CD33E0 /* SwarmCursorsExtension.appex */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		E6D904A4F3B6C010DD232F06 /* web-extension */ = {
+			isa = PBXGroup;
+			children = (
+				5AFC90FC6EB788D77B389045 /* _locales */,
+				E489A88314942986FC9184CF /* background.js */,
+				8A2817B94F6506853FC3613F /* content */,
+				8E0B6057FF900D34DEE93C22 /* icons */,
+				14274D7AA3CC578CF5AC9B1D /* manifest.json */,
+			);
+			path = "web-extension";
+			sourceTree = "<group>";
+		};
+		E79A5419F22711B77FC615F8 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				5B8F4F0B7849CFA47E4B6B15 /* Info.plist */,
+				C715FC2D5B7D808E9E74F546 /* SafariWebExtensionHandler.swift */,
+				66745079928602E1B20C02FA /* SwarmCursorsExtension.entitlements */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		7B05E6C69E2FF5F69C40631E /* SwarmCursorsExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 32507BE38CF66D40A9DFC64F /* Build configuration list for PBXNativeTarget "SwarmCursorsExtension" */;
+			buildPhases = (
+				69AE80A89EB586EB10008E65 /* Sources */,
+				D3974AA7A381DE61BF70F1B5 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SwarmCursorsExtension;
+			packageProductDependencies = (
+			);
+			productName = SwarmCursorsExtension;
+			productReference = 4E505C3CB693574938CD33E0 /* SwarmCursorsExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+		B60A8AE843AD1A82D61D9068 /* SwarmCursors */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D5439F57A5627AC7CC3A3C50 /* Build configuration list for PBXNativeTarget "SwarmCursors" */;
+			buildPhases = (
+				5317F63BE5817AFEC4C8CB00 /* Sources */,
+				639B7A569B849D2F41D13AB9 /* Resources */,
+				B264D06374B30D3F7CE9C021 /* Embed Foundation Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				CCFB8AA241C7F52E4E8E305A /* PBXTargetDependency */,
+			);
+			name = SwarmCursors;
+			packageProductDependencies = (
+			);
+			productName = SwarmCursors;
+			productReference = 1900CE2739E1B823A073EEFE /* SwarmCursors.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		824916B7D7D83104D4948B1F /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+					7B05E6C69E2FF5F69C40631E = {
+						DevelopmentTeam = Q42CQ5VP5A;
+						ProvisioningStyle = Automatic;
+					};
+					B60A8AE843AD1A82D61D9068 = {
+						DevelopmentTeam = Q42CQ5VP5A;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = D3B3363172884AD539B2CD3D /* Build configuration list for PBXProject "SwarmCursors" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+				"zh-Hans",
+			);
+			mainGroup = 7A14541F04CEB5B93AE26568;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = B2B0519161B67D2B9999FA2C /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				B60A8AE843AD1A82D61D9068 /* SwarmCursors */,
+				7B05E6C69E2FF5F69C40631E /* SwarmCursorsExtension */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		639B7A569B849D2F41D13AB9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5BCB42D969F7BCC6D3D2A259 /* AppIcon.icon in Resources */,
+				84B7290C7FB2295DF4E64AAE /* Assets.xcassets in Resources */,
+				8854BBCC10E174EFB9B2DD98 /* Localizable.strings in Resources */,
+				7D96B1137102C31B189C4431 /* swarm-mini.html in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D3974AA7A381DE61BF70F1B5 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				74906CAC6B0A4FC2D3A130AD /* _locales in Resources */,
+				E0D40F734867F98B26D97F5E /* background.js in Resources */,
+				FD24DF3A9D393E7EB4744766 /* content in Resources */,
+				DC5BE0D89B3D7C2713B1A44A /* icons in Resources */,
+				C9B569733235FAEA62A258F1 /* manifest.json in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		5317F63BE5817AFEC4C8CB00 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E516E016FF0155DA2DCF725B /* AboutView.swift in Sources */,
+				DA432EFA799B5089C6F498ED /* Compat.swift in Sources */,
+				076384A12185F665BB0464A1 /* Design.swift in Sources */,
+				3704ACF8923D1DFC650D174D /* GuideView.swift in Sources */,
+				F73DC5430D291E9F648489F9 /* PreviewWebView.swift in Sources */,
+				0ADDE207536DC167E576736D /* RootView.swift in Sources */,
+				F852B33861C13FB8C9F97551 /* StudioView.swift in Sources */,
+				264BF5A550D2ED6FE1F59F9D /* SwarmCursorsApp.swift in Sources */,
+				AD0087093150F0DEAE1A84BA /* SwarmSettings.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		69AE80A89EB586EB10008E65 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0881DECE565F12094AD6D7D6 /* SafariWebExtensionHandler.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		CCFB8AA241C7F52E4E8E305A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 7B05E6C69E2FF5F69C40631E /* SwarmCursorsExtension */;
+			targetProxy = 05C1EDACD1DE38433B3694FB /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		E117A5612FE646A44671E1EB /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A0BFABFFA16AD4E932533BEE /* en */,
+				C908A2983B355965C735F696 /* zh-Hans */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		27FCEC27E4EC2CE55F3D30A1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				CODE_SIGN_ENTITLEMENTS = Extension/SwarmCursorsExtension.entitlements;
+				INFOPLIST_FILE = Extension/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.Erico.SwarmCursors.Extension;
+				PRODUCT_NAME = "Swarm Cursors Extension";
+				SDKROOT = auto;
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator xros xrsimulator macosx";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				TARGETED_DEVICE_FAMILY = "1,2,6,7";
+			};
+			name = Release;
+		};
+		4F8DBFED77E527750A95F0D9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = App/SwarmCursors.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_FILE = App/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.Erico.SwarmCursors;
+				PRODUCT_NAME = "Swarm Cursors";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator xros xrsimulator macosx";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				TARGETED_DEVICE_FAMILY = "1,2,6,7";
+			};
+			name = Release;
+		};
+		5545909EA9C74D7C6E71125A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				CODE_SIGN_ENTITLEMENTS = Extension/SwarmCursorsExtension.entitlements;
+				INFOPLIST_FILE = Extension/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.Erico.SwarmCursors.Extension;
+				PRODUCT_NAME = "Swarm Cursors Extension";
+				SDKROOT = auto;
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator xros xrsimulator macosx";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				TARGETED_DEVICE_FAMILY = "1,2,6,7";
+			};
+			name = Debug;
+		};
+		75DCFF7257C6D791E657E765 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = Q42CQ5VP5A;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				XROS_DEPLOYMENT_TARGET = 1.0;
+			};
+			name = Debug;
+		};
+		9B1E40B1ACCFF9AD79EECCF3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = Q42CQ5VP5A;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+				XROS_DEPLOYMENT_TARGET = 1.0;
+			};
+			name = Release;
+		};
+		9F6DCFE00047C76E325D633F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = App/SwarmCursors.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_FILE = App/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.Erico.SwarmCursors;
+				PRODUCT_NAME = "Swarm Cursors";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator xros xrsimulator macosx";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				TARGETED_DEVICE_FAMILY = "1,2,6,7";
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		32507BE38CF66D40A9DFC64F /* Build configuration list for PBXNativeTarget "SwarmCursorsExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5545909EA9C74D7C6E71125A /* Debug */,
+				27FCEC27E4EC2CE55F3D30A1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		D3B3363172884AD539B2CD3D /* Build configuration list for PBXProject "SwarmCursors" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				75DCFF7257C6D791E657E765 /* Debug */,
+				9B1E40B1ACCFF9AD79EECCF3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		D5439F57A5627AC7CC3A3C50 /* Build configuration list for PBXNativeTarget "SwarmCursors" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9F6DCFE00047C76E325D633F /* Debug */,
+				4F8DBFED77E527750A95F0D9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 824916B7D7D83104D4948B1F /* Project object */;
+}

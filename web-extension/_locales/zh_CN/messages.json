@@ -1,0 +1,22 @@
+{
+  "extName": {
+    "message": "Swarm Cursors",
+    "description": "扩展显示名称"
+  },
+  "extDescription": {
+    "message": "以协作光标动画呈现网页内容的绘制过程。",
+    "description": "Safari 扩展库中的扩展描述"
+  },
+  "actionTitle": {
+    "message": "Swarm Cursors（⌥⇧S）",
+    "description": "工具栏按钮提示"
+  },
+  "commandDescription": {
+    "message": "切换网页动画",
+    "description": "键盘快捷键说明"
+  },
+  "blockedTitle": {
+    "message": "此页面不支持扩展动画",
+    "description": "受保护页面的角标提示"
+  }
+}

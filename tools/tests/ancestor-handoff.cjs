@@ -1,0 +1,20 @@
+const fs=require('fs'),path=require('path'),assert=require('assert/strict');
+const {webkit}=require('/Users/erico/.nvm/versions/node/v22.22.1/lib/node_modules/playwright');
+(async()=>{const b=await webkit.launch();try{
+const p=await b.newPage();await p.addInitScript(()=>{window.browser={runtime:{sendMessage:(m,cb)=>{const s={autoAgents:false,agents:6,speed:3,sound:false,enabled:true};cb?.(s);return Promise.resolve(s)},onMessage:{addListener(){}}},storage:{local:{get:async()=>({})}}};});
+await p.goto('data:text/html,'+encodeURIComponent('<style>#panel{background:#ddd;border:2px solid red;padding:30px;width:500px}h2{color:blue}</style><section id="panel"><h2 id="child">Completed child remains visible</h2><input value="native"></section>'));
+const root=path.resolve(__dirname,'../../web-extension/content');
+await p.addScriptTag({content:fs.readFileSync(path.join(root,'mask.js'),'utf8')});
+await p.evaluate(()=>{window.__hold=true;const commit=__swarmMask.commit;__swarmMask.commit=t=>__hold&&t.record.el.id==='panel'?false:commit(t)});
+await p.addScriptTag({content:fs.readFileSync(path.join(root,'swarm.js'),'utf8')});
+await p.waitForFunction(()=>document.querySelector('#child').classList.contains('__swarm-drawn'),{},{timeout:20000});
+await p.waitForTimeout(300);
+const state=await p.evaluate(()=>({parent:document.querySelector('#panel').hasAttribute('data-swarm-pending'),retained:__swarmRebuild.app.engine.items.some(it=>it.nativeSource.id==='child'&&it.done&&it.node.isConnected&&!it.nativeSkip)}));
+assert.equal(state.parent,true);assert.equal(state.retained,true,JSON.stringify(state));console.log('PASS completed child overlay remains while parent surface is masked');
+await p.evaluate(()=>__hold=false);await p.waitForFunction(()=>!document.querySelector('#panel').hasAttribute('data-swarm-pending'));
+await p.waitForFunction(()=>!__swarmRebuild.app.engine.items.some(it=>it.nativeSource.id==='child'));
+console.log('PASS overlay retires after native ancestor handoff');
+await p.evaluate(()=>document.documentElement.classList.add('pointerfocus'));await p.waitForTimeout(100);
+assert.equal(await p.evaluate(()=>document.documentElement.hasAttribute('data-swarm-pending')),false);
+console.log('PASS document interaction classes do not create unowned masks');
+}finally{await b.close()}})().catch(e=>{console.error(e);process.exit(1)});

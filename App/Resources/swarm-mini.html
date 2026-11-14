@@ -1,0 +1,875 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Swarm Live Preview</title>
+<style>
+  :root {
+    --bg-base: #0f1117;
+    --bg-page: #171923;
+    --bg-card: rgba(255, 255, 255, 0.05);
+    --border-card: rgba(255, 255, 255, 0.1);
+    --text-pri: #f7fafc;
+    --text-sec: #a0aec0;
+    --accent: #3182ce;
+    --accent-grad: linear-gradient(135deg, #3182ce 0%, #805ad5 100%);
+    --accent-glow: rgba(49, 130, 206, 0.35);
+  }
+
+  @media (prefers-color-scheme: light) {
+    :root {
+      --bg-base: #f4f5f8;
+      --bg-page: #ffffff;
+      --bg-card: rgba(0, 0, 0, 0.035);
+      --border-card: rgba(0, 0, 0, 0.08);
+      --text-pri: #1a202c;
+      --text-sec: #4a5568;
+      --accent: #2b6cb0;
+      --accent-grad: linear-gradient(135deg, #2b6cb0 0%, #6b46c1 100%);
+      --accent-glow: rgba(43, 108, 176, 0.2);
+    }
+  }
+
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: var(--bg-base);
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", system-ui, sans-serif;
+    -webkit-user-select: none;
+    user-select: none;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  #viewport {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Fixed 640x360 coordinate space scaled smoothly to fit the container */
+  #stage {
+    position: absolute;
+    width: 640px;
+    height: 360px;
+    background: var(--bg-page);
+    border-radius: 12px;
+    box-shadow: 0 14px 32px rgba(0,0,0,0.22), 0 1px 3px rgba(0,0,0,0.1);
+    transform-origin: center center;
+    overflow: hidden;
+  }
+
+  /* ================= 1. Genuine Webpage ================= */
+  #mini-page {
+    position: absolute;
+    inset: 0;
+    padding: 18px 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  /* Nav */
+  .mini-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 28px;
+    padding-bottom: 4px;
+    transition: opacity 0.25s ease;
+  }
+  .mini-brand {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+  }
+  .mini-logo {
+    width: 18px;
+    height: 18px;
+    background: var(--accent-grad);
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 11px;
+    font-weight: 800;
+  }
+  .mini-title {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--text-pri);
+  }
+  .mini-links {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .mini-link {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--text-sec);
+  }
+  .mini-btn-nav {
+    font-size: 10px;
+    font-weight: 600;
+    padding: 3px 10px;
+    border-radius: 12px;
+    background: var(--accent);
+    color: #fff;
+  }
+
+  /* Hero Section */
+  .mini-hero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-top: 2px;
+  }
+  .mini-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 3px 10px;
+    border-radius: 99px;
+    background: var(--accent-glow);
+    border: 1px solid rgba(49, 130, 206, 0.3);
+    font-size: 10px;
+    font-weight: 600;
+    color: var(--text-pri);
+    margin-bottom: 8px;
+    transition: opacity 0.25s ease;
+  }
+  .mini-h1 {
+    font-size: 24px;
+    line-height: 1.15;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    color: var(--text-pri);
+    margin: 0 0 6px 0;
+  }
+  .mini-desc {
+    font-size: 11px;
+    line-height: 1.4;
+    color: var(--text-sec);
+    margin: 0;
+    max-width: 440px;
+  }
+  .mini-actions {
+    display: flex;
+    gap: 8px;
+    margin-top: 10px;
+  }
+  .mini-btn-primary {
+    padding: 5px 14px;
+    border-radius: 8px;
+    background: var(--accent-grad);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 600;
+    box-shadow: 0 2px 8px var(--accent-glow);
+    transition: opacity 0.25s ease;
+  }
+  .mini-btn-secondary {
+    padding: 5px 14px;
+    border-radius: 8px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-card);
+    color: var(--text-pri);
+    font-size: 11px;
+    font-weight: 600;
+    transition: opacity 0.25s ease;
+  }
+
+  /* Feature Cards */
+  .mini-cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+    margin-top: 8px;
+  }
+  .mini-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-card);
+    border-radius: 10px;
+    padding: 10px 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    transition: opacity 0.25s ease;
+  }
+  .mini-card-icon {
+    width: 20px;
+    height: 20px;
+    border-radius: 6px;
+    background: var(--accent-glow);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+  }
+  .mini-card-title {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--text-pri);
+  }
+  .mini-card-sub {
+    font-size: 9.5px;
+    color: var(--text-sec);
+    line-height: 1.35;
+  }
+
+  /* ================= 2. Live Building Overlay ================= */
+
+  /* Draw-on outlines: the v0.2 signature move, restored on top of the real
+     DOM build. Every element gets inked on before its fill fades up. */
+  #draw-layer {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 8;
+    overflow: visible;
+  }
+  #draw-layer rect {
+    fill: none;
+    stroke-width: 1.6;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .selection-guide {
+    position: absolute;
+    box-sizing: border-box;
+    border-width: 1.5px;
+    border-style: solid;
+    pointer-events: none;
+    z-index: 10;
+  }
+  .selection-guide .handle {
+    position: absolute;
+    width: 5px;
+    height: 5px;
+    background: #fff;
+    border: 1px solid inherit;
+  }
+  .selection-guide .dim-tag {
+    position: absolute;
+    bottom: -15px;
+    right: 0;
+    color: #fff;
+    font-size: 8px;
+    font-weight: 600;
+    padding: 1px 3px;
+    border-radius: 2px;
+    font-family: monospace;
+    white-space: nowrap;
+  }
+
+  #guides-layer {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 15;
+  }
+
+  #cursors-layer {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 20;
+  }
+
+  /* Swarm Cursors */
+  .swarm-cursor {
+    position: absolute;
+    left: 0;
+    top: 0;
+    will-change: transform;
+    pointer-events: none;
+    transition: transform 0.18s cubic-bezier(0.2, 0.9, 0.3, 1);
+  }
+  .swarm-cursor svg.arrow {
+    display: block;
+    width: 13px;
+    height: 17px;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.35));
+  }
+  .swarm-label {
+    position: absolute;
+    left: 11px;
+    top: 13px;
+    font-size: 9px;
+    font-weight: 600;
+    color: #fff;
+    padding: 1.5px 5.5px;
+    border-radius: 4px;
+    white-space: nowrap;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+    letter-spacing: 0.01em;
+  }
+
+  /* Mini HUD Status Pill */
+  #mini-hud {
+    position: absolute;
+    top: 10px;
+    right: 12px;
+    z-index: 50;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(0, 0, 0, 0.65);
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+    color: #fff;
+    font-size: 9px;
+    font-weight: 600;
+    padding: 3px 8px;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    pointer-events: none;
+  }
+  #mini-hud .pulse {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #0ACF83;
+    box-shadow: 0 0 6px #0ACF83;
+    animation: blink 1.2s infinite ease-in-out;
+  }
+  @keyframes blink {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(0.85); }
+  }
+</style>
+</head>
+<body>
+
+<div id="viewport">
+  <div id="stage">
+    <!-- 1. Genuine Mini Webpage DOM in real positions -->
+    <div id="mini-page">
+      <nav class="mini-nav" data-swarm-item="nav">
+        <div class="mini-brand">
+          <div class="mini-logo">S</div>
+          <span class="mini-title" data-swarm-text="SwarmCursors">SwarmCursors</span>
+        </div>
+        <div class="mini-links">
+          <span class="mini-link" data-swarm-text="Engine">Engine</span>
+          <span class="mini-link" data-swarm-text="Features">Features</span>
+          <span class="mini-link" data-swarm-text="Docs">Docs</span>
+          <div class="mini-btn-nav" data-swarm-item="btn-nav" data-swarm-text="Explore">Explore</div>
+        </div>
+      </nav>
+
+      <section class="mini-hero">
+        <div class="mini-badge" data-swarm-item="badge">
+          <span>✨</span>
+          <span data-swarm-text="Live Page Animation">Live Page Animation</span>
+        </div>
+        <h1 class="mini-h1" data-swarm-text="Page Construction, Visualized">Page Construction, Visualized</h1>
+        <p class="mini-desc" data-swarm-text="Coordinated cursors draw, duplicate, and refine page elements.">
+          Coordinated cursors draw, duplicate, and refine page elements.
+        </p>
+        <div class="mini-actions">
+          <div class="mini-btn-primary" data-swarm-item="btn-pri" data-swarm-text="Live Preview">Live Preview</div>
+          <div class="mini-btn-secondary" data-swarm-item="btn-sec" data-swarm-text="Documentation">Documentation</div>
+        </div>
+      </section>
+
+      <div class="mini-cards">
+        <div class="mini-card" data-swarm-item="card">
+          <div class="mini-card-icon">⚡️</div>
+          <div class="mini-card-title" data-swarm-text="Page Structure">Page Structure</div>
+          <div class="mini-card-sub" data-swarm-text="Precise element geometry.">Precise element geometry.</div>
+        </div>
+        <div class="mini-card" data-swarm-item="card">
+          <div class="mini-card-icon">👥</div>
+          <div class="mini-card-title" data-swarm-text="Cursor Coordination">Cursor Coordination</div>
+          <div class="mini-card-sub" data-swarm-text="Adaptive task allocation.">Adaptive task allocation.</div>
+        </div>
+        <div class="mini-card" data-swarm-item="card">
+          <div class="mini-card-icon">🎨</div>
+          <div class="mini-card-title" data-swarm-text="Drawing and Editing">Drawing and Editing</div>
+          <div class="mini-card-sub" data-swarm-text="Progressive drawing and text entry.">Progressive drawing and text entry.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. Interactive Guides Layer & Collaborative Cursors -->
+    <svg id="draw-layer" viewBox="0 0 640 360" preserveAspectRatio="none"></svg>
+    <div id="guides-layer"></div>
+    <div id="cursors-layer"></div>
+
+    <!-- Mini Status Pill -->
+    <div id="mini-hud">
+      <div class="pulse"></div>
+      <span id="hud-text">Scanning page…</span>
+    </div>
+  </div>
+</div>
+
+<script>
+(function () {
+  "use strict";
+
+  window.__SWARM_CONFIG = {
+    speed: 2,
+    agents: 20,
+    sound: false
+  };
+
+  window.setSwarmConfig = function (cfg) {
+    if (!cfg) return;
+    if (cfg.speed) window.__SWARM_CONFIG.speed = cfg.speed;
+    if (cfg.agents) window.__SWARM_CONFIG.agents = Math.min(100, Math.max(1, cfg.agents));
+    if (typeof cfg.sound === "boolean") window.__SWARM_CONFIG.sound = cfg.sound;
+    if (window.__swarmEngine) {
+      window.__swarmEngine.onConfigChanged();
+    }
+  };
+
+  const STAGE_W = 640;
+  const STAGE_H = 360;
+
+  const NAMES = [
+    "Ada", "Linus", "Grace", "Alan", "Margaret", "Ken", "Dennis", "Radia",
+    "Guido", "Frances", "Bjarne", "Hedy", "Tim", "Katherine", "Sophie", "Brian"
+  ];
+
+  const COLORS = [
+    "#F24E1E", "#A259FF", "#1ABCFE", "#0ACF83", "#FF7262", "#FFC700",
+    "#9747FF", "#E8467C", "#14AE5C", "#0D99FF", "#FF8A00", "#00B5CE"
+  ];
+
+  const ARROW_SVG = 'M0 0 L0 16 L3.8 12.2 L6.2 18.2 L8.8 17.1 L6.4 11.2 L11.2 10.8 Z';
+
+  const stage = document.getElementById("stage");
+  const miniPage = document.getElementById("mini-page");
+  const guidesLayer = document.getElementById("guides-layer");
+  const cursorsLayer = document.getElementById("cursors-layer");
+  const drawLayer = document.getElementById("draw-layer");
+  const hudText = document.getElementById("hud-text");
+
+  const SVG_NS = "http://www.w3.org/2000/svg";
+  const REDUCE_MOTION = !!(
+    window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches
+  );
+
+  // Keep stage perfectly centered and fit without distortion
+  function fitStage() {
+    const vw = window.innerWidth;
+    const vh = window.innerHeight;
+    const s = Math.min(vw / STAGE_W, vh / STAGE_H);
+    stage.style.transform = `scale(${s})`;
+  }
+  window.addEventListener("resize", fitStage);
+  fitStage();
+
+  // Synthetic click audio
+  let audioCtx = null;
+  function playClickSound() {
+    if (!window.__SWARM_CONFIG.sound) return;
+    try {
+      if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      if (audioCtx.state === "suspended") audioCtx.resume();
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.type = "sine";
+      osc.frequency.setValueAtTime(600 + Math.random() * 400, audioCtx.currentTime);
+      gain.gain.setValueAtTime(0.04, audioCtx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.04);
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+      osc.start();
+      osc.stop(audioCtx.currentTime + 0.045);
+    } catch (_) {}
+  }
+
+  // Accurately compute element coordinates relative to unscaled stage (640x360)
+  function getUnscaledStageBounds(el) {
+    const stageRect = stage.getBoundingClientRect();
+    const elRect = el.getBoundingClientRect();
+    const scale = stageRect.width / STAGE_W;
+    return {
+      x: (elRect.left - stageRect.left) / scale,
+      y: (elRect.top - stageRect.top) / scale,
+      w: elRect.width / scale,
+      h: elRect.height / scale
+    };
+  }
+
+  // Wrap every character in a span so text length never collapses line heights or positions!
+  function prepareTextSpans() {
+    const textEls = miniPage.querySelectorAll("[data-swarm-text]");
+    textEls.forEach((el) => {
+      const text = el.getAttribute("data-swarm-text");
+      el.innerHTML = "";
+      const spans = [];
+      for (let i = 0; i < text.length; i++) {
+        const span = document.createElement("span");
+        span.textContent = text[i];
+        span.style.visibility = "hidden";
+        el.appendChild(span);
+        spans.push(span);
+      }
+      el._swarmSpans = spans;
+    });
+  }
+
+  // Model Capture: read DOM elements and text nodes in their true positions
+  function captureModel() {
+    const items = [];
+
+    // 1. Box items
+    const boxes = miniPage.querySelectorAll("[data-swarm-item]");
+    boxes.forEach((el) => {
+      items.push({
+        type: "box",
+        el: el,
+        bounds: getUnscaledStageBounds(el),
+        priority: getBoxPriority(el)
+      });
+    });
+
+    // 2. Text items
+    const texts = miniPage.querySelectorAll("[data-swarm-text]");
+    texts.forEach((el) => {
+      items.push({
+        type: "text",
+        el: el,
+        spans: el._swarmSpans,
+        bounds: getUnscaledStageBounds(el),
+        priority: getTextPriority(el)
+      });
+    });
+
+    items.sort((a, b) => a.priority - b.priority || a.bounds.y - b.bounds.y || a.bounds.x - b.bounds.x);
+    return items;
+  }
+
+  function getBoxPriority(el) {
+    if (el.classList.contains("mini-nav")) return 1;
+    if (el.classList.contains("mini-btn-nav")) return 1.8;
+    if (el.classList.contains("mini-badge")) return 2;
+    if (el.classList.contains("mini-btn-primary") || el.classList.contains("mini-btn-secondary")) return 4;
+    if (el.classList.contains("mini-card")) return 5;
+    return 3;
+  }
+
+  function getTextPriority(el) {
+    if (el.classList.contains("mini-title")) return 1.4;
+    if (el.classList.contains("mini-link")) return 1.6;
+    if (el.classList.contains("mini-btn-nav")) return 1.9;
+    if (el.parentElement && el.parentElement.classList.contains("mini-badge")) return 2.2;
+    if (el.tagName === "H1") return 3;
+    if (el.classList.contains("mini-desc")) return 3.5;
+    if (el.classList.contains("mini-btn-primary") || el.classList.contains("mini-btn-secondary")) return 4.2;
+    if (el.classList.contains("mini-card-title")) return 5.2;
+    if (el.classList.contains("mini-card-sub")) return 5.5;
+    return 4;
+  }
+
+  // --- Draw-on outlines (v0.2's stroke sweep, on the real DOM) ---
+
+  function cornerRadiusOf(el) {
+    try {
+      const r = parseFloat(getComputedStyle(el).borderTopLeftRadius);
+      return isFinite(r) ? Math.min(r, Math.min(el.offsetWidth, el.offsetHeight) / 2) : 0;
+    } catch (_) {
+      return 0;
+    }
+  }
+
+  /// Inks a rounded rect on in the direction a hand would draw it: one continuous
+  /// stroke travelling the perimeter, ease-out, ending on the starting corner.
+  /// The element's fill only fades up once the pen closes the loop.
+  function drawOutline(bounds, color, durMs, radius) {
+    if (REDUCE_MOTION || bounds.w < 2 || bounds.h < 2) {
+      return Promise.resolve();
+    }
+
+    const r = document.createElementNS(SVG_NS, "rect");
+    r.setAttribute("x", bounds.x);
+    r.setAttribute("y", bounds.y);
+    r.setAttribute("width", bounds.w);
+    r.setAttribute("height", bounds.h);
+    if (radius > 0) {
+      r.setAttribute("rx", radius);
+      r.setAttribute("ry", radius);
+    }
+    r.setAttribute("stroke", color);
+    r.setAttribute("stroke-opacity", "0.6");
+    r.setAttribute("stroke-width", "1.3");
+
+    const len = 2 * (bounds.w + bounds.h);
+    r.style.strokeDasharray = `${len}`;
+    r.style.strokeDashoffset = `${len}`;
+    drawLayer.appendChild(r);
+
+    return new Promise((done) => {
+      const t0 = performance.now();
+      const step = (t) => {
+        const k = Math.min(1, (t - t0) / durMs);
+        const e = 1 - Math.pow(1 - k, 3); // ease-out cubic, same curve as v0.2
+        r.style.strokeDashoffset = `${len * (1 - e)}`;
+        if (k < 1) {
+          requestAnimationFrame(step);
+          return;
+        }
+        // The loop is closed: the caller may reveal the element right now. The
+        // outline lingers a beat on its own so the eye registers the closed
+        // shape, then retires and lets the real element own the pixels.
+        done();
+        setTimeout(() => {
+          r.style.transition = "opacity .22s ease";
+          r.style.opacity = "0";
+          setTimeout(() => r.remove(), 240);
+        }, 90);
+      };
+      requestAnimationFrame(step);
+    });
+  }
+
+  // --- Real-Time Swarm Engine ---
+  class LiveSwarmEngine {
+    constructor() {
+      this.cursors = [];
+      this.running = false;
+      this.initCursors();
+    }
+
+    initCursors() {
+      cursorsLayer.innerHTML = "";
+      this.cursors = [];
+      const count = window.__SWARM_CONFIG.agents;
+      for (let i = 0; i < count; i++) {
+        const cColor = COLORS[i % COLORS.length];
+        const cName = NAMES[i % NAMES.length];
+
+        const el = document.createElement("div");
+        el.className = "swarm-cursor";
+        el.innerHTML = `
+          <svg class="arrow" viewBox="0 0 12 20">
+            <path d="${ARROW_SVG}" fill="${cColor}" stroke="#ffffff" stroke-width="1.2" stroke-linejoin="round"/>
+          </svg>
+          <div class="swarm-label" style="background:${cColor}">${cName}</div>
+        `;
+        cursorsLayer.appendChild(el);
+
+        const cur = {
+          id: i,
+          el: el,
+          x: STAGE_W / 2 + (Math.random() - 0.5) * 260,
+          y: STAGE_H / 2 + (Math.random() - 0.5) * 160,
+          busy: false,
+          color: cColor,
+          name: cName
+        };
+        this.updatePos(cur, cur.x, cur.y);
+        this.cursors.push(cur);
+      }
+    }
+
+    updatePos(c, x, y) {
+      c.x = x;
+      c.y = y;
+      c.el.style.transform = `translate(${x}px, ${y}px)`;
+    }
+
+    async moveCursor(c, x, y, durationMs = 280) {
+      const dur = durationMs / window.__SWARM_CONFIG.speed;
+      c.el.style.transition = `transform ${dur}ms cubic-bezier(0.2, 0.9, 0.3, 1)`;
+      this.updatePos(c, x, y);
+      await this.sleep(dur);
+    }
+
+    sleep(ms) {
+      return new Promise((resolve) => setTimeout(resolve, ms / window.__SWARM_CONFIG.speed));
+    }
+
+    onConfigChanged() {
+      if (this.cursors.length !== window.__SWARM_CONFIG.agents) {
+        this.initCursors();
+      }
+    }
+
+    startIdleMotion() {
+      this.idleTimer = setInterval(() => {
+        if (!this.running) return;
+        this.cursors.forEach((c) => {
+          if (!c.busy && Math.random() < 0.35) {
+            const rx = Math.max(25, Math.min(STAGE_W - 25, c.x + (Math.random() - 0.5) * 140));
+            const ry = Math.max(25, Math.min(STAGE_H - 25, c.y + (Math.random() - 0.5) * 90));
+            this.moveCursor(c, rx, ry, 500 + Math.random() * 400);
+          }
+        });
+      }, 450);
+    }
+
+    // Collaborative Box Construction
+    async buildBox(cursor, item) {
+      cursor.busy = true;
+      const b = item.bounds;
+
+      // 1. Move to top-left corner
+      await this.moveCursor(cursor, b.x - 2, b.y - 4, 240);
+      playClickSound();
+
+      // 2. Draw selection boundary overlay
+      const guide = document.createElement("div");
+      guide.className = "selection-guide";
+      guide.style.left = `${b.x}px`;
+      guide.style.top = `${b.y}px`;
+      guide.style.width = "4px";
+      guide.style.height = "4px";
+      guide.style.borderColor = cursor.color;
+      guide.style.backgroundColor = `${cursor.color}15`;
+      guide.innerHTML = `
+        <div class="handle" style="top:-3px;left:-3px;border-color:${cursor.color}"></div>
+        <div class="handle" style="top:-3px;right:-3px;border-color:${cursor.color}"></div>
+        <div class="handle" style="bottom:-3px;left:-3px;border-color:${cursor.color}"></div>
+        <div class="handle" style="bottom:-3px;right:-3px;border-color:${cursor.color}"></div>
+        <div class="dim-tag" style="background:${cursor.color}">${Math.round(b.w)} × ${Math.round(b.h)}</div>
+      `;
+      guidesLayer.appendChild(guide);
+
+      // Drag cursor to bottom-right corner to expand box
+      const dragDur = (300 / window.__SWARM_CONFIG.speed);
+      guide.style.transition = `width ${dragDur}ms ease-out, height ${dragDur}ms ease-out`;
+      guide.style.width = `${b.w}px`;
+      guide.style.height = `${b.h}px`;
+
+      // The outline is inked on at the exact pace the pointer drags the box out:
+      // a Figma selection frame made of one continuous stroke.
+      const strokeJob = drawOutline(b, cursor.color, dragDur, cornerRadiusOf(item.el));
+
+      await this.moveCursor(cursor, b.x + b.w + 2, b.y + b.h + 2, 300);
+      await strokeJob;
+
+      // Reveal real DOM element in place
+      item.el.style.opacity = "1";
+
+      // Fade out guide cleanly
+      guide.style.transition = "opacity 0.2s ease";
+      guide.style.opacity = "0";
+      setTimeout(() => guide.remove(), 220);
+
+      await this.sleep(40);
+      cursor.busy = false;
+    }
+
+    // Typewriter Text Construction
+    async buildText(cursor, item) {
+      cursor.busy = true;
+      const b = item.bounds;
+
+      await this.moveCursor(cursor, b.x - 2, b.y + b.h / 2, 200);
+
+      const spans = item.spans || [];
+      const totalSpans = spans.length;
+      const chunk = Math.max(1, Math.floor(totalSpans / 12));
+
+      for (let i = 0; i < totalSpans; i += chunk) {
+        for (let j = i; j < Math.min(totalSpans, i + chunk); j++) {
+          spans[j].style.visibility = "visible";
+        }
+        const progressX = b.x + (b.w * ((i + chunk) / totalSpans));
+        this.updatePos(cursor, progressX, b.y + b.h / 2);
+        playClickSound();
+        await this.sleep(25);
+      }
+      spans.forEach((s) => s.style.visibility = "visible");
+
+      cursor.busy = false;
+    }
+
+    async runLoop() {
+      this.running = true;
+      this.startIdleMotion();
+
+      // Wrap text in invisible spans upfront so layout is 100% frozen
+      prepareTextSpans();
+
+      while (this.running) {
+        hudText.textContent = "Preparing preview…";
+        guidesLayer.innerHTML = "";
+        drawLayer.innerHTML = "";
+
+        // Reset: hide boxes and spans, but DO NOT destroy layout or text content!
+        const boxes = miniPage.querySelectorAll("[data-swarm-item]");
+        boxes.forEach((b) => {
+          b.style.opacity = "0";
+        });
+        const spans = miniPage.querySelectorAll("[data-swarm-text] span");
+        spans.forEach((s) => {
+          s.style.visibility = "hidden";
+        });
+
+        const allItems = captureModel();
+        await this.sleep(320);
+        hudText.textContent = `${this.cursors.length} cursors active`;
+
+        // Distribute construction tasks to available swarm cursors
+        let taskIdx = 0;
+        const total = allItems.length;
+
+        while (taskIdx < total) {
+          const idle = this.cursors.filter((c) => !c.busy);
+          if (idle.length === 0) {
+            await this.sleep(30);
+            continue;
+          }
+
+          const cur = idle[0];
+          const task = allItems[taskIdx++];
+
+          if (task.type === "box") {
+            this.buildBox(cur, task);
+          } else if (task.type === "text") {
+            this.buildText(cur, task);
+          }
+
+          await this.sleep(60);
+        }
+
+        // Wait until all cursors finish current construction
+        while (this.cursors.some((c) => c.busy)) {
+          await this.sleep(40);
+        }
+
+        // Construction completed: celebrate & Go-live
+        hudText.textContent = `${this.cursors.length} cursors · Complete`;
+
+        // Disperse cursors in a circle
+        this.cursors.forEach((c, idx) => {
+          const angle = (idx / this.cursors.length) * Math.PI * 2;
+          const tx = STAGE_W / 2 + Math.cos(angle) * 180;
+          const ty = STAGE_H / 2 + Math.sin(angle) * 100;
+          this.moveCursor(c, tx, ty, 600);
+        });
+
+        // Display completed webpage for a few seconds
+        await this.sleep(2600);
+      }
+    }
+  }
+
+  const engine = new LiveSwarmEngine();
+  window.__swarmEngine = engine;
+  engine.runLoop();
+
+})();
+</script>
+</body>
+</html>

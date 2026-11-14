@@ -1,0 +1,22 @@
+{
+  "extName": {
+    "message": "Swarm Cursors",
+    "description": "Extension display name"
+  },
+  "extDescription": {
+    "message": "Visualize page construction with coordinated cursor animations.",
+    "description": "Extension description in the Safari Extensions gallery"
+  },
+  "actionTitle": {
+    "message": "Swarm Cursors (⌥⇧S)",
+    "description": "Toolbar button tooltip"
+  },
+  "commandDescription": {
+    "message": "Toggle page animations",
+    "description": "Keyboard shortcut description"
+  },
+  "blockedTitle": {
+    "message": "Animations are unavailable on this page",
+    "description": "Badge tooltip on protected pages"
+  }
+}

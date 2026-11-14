@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Technical Support</title>
+
+    <script>
+        // Use the browser's primary language; all non-Simplified Chinese locales use English.
+        const browserLanguage = (navigator.language || navigator.languages?.[0] || "en").replace(/_/g, "-");
+        const simplifiedChinese = /^zh(?:-|$)/i.test(browserLanguage)
+            && !/-Hant(?:-|$)/i.test(browserLanguage)
+            && /-(?:Hans|CN|SG)(?:-|$)/i.test(browserLanguage);
+        document.documentElement.lang = simplifiedChinese ? "zh-CN" : "en";
+    </script>
+
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        h1 {
+            color: #000;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+        }
+
+        .footer {
+            margin-top: 40px;
+            font-size: .8em;
+            color: #999;
+            border-top: 1px solid #eee;
+            padding-top: 20px;
+        }
+
+        [data-language] { display: none; }
+        html[lang="en"] [data-language="en"],
+        html[lang="zh-CN"] [data-language="zh-CN"] { display: block; }
+        .language-bar { display: flex; justify-content: flex-end; }
+        .language-toggle {
+            font: inherit;
+            color: inherit;
+            background: #fff;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            padding: 6px 12px;
+            cursor: pointer;
+        }
+        .language-toggle:focus-visible { outline: 2px solid #0066cc; outline-offset: 3px; }
+    </style>
+
+</head>
+
+<body>
+<div class="language-bar">
+    <button id="language-toggle" class="language-toggle" type="button" lang="zh-CN" aria-label="Switch to 简体中文">简体中文</button>
+</div>
+<main>
+<section data-language="en" lang="en">
+<h1>Technical Support</h1>
+<p>Swarm Cursors is a webpage animation extension for Safari, with coordinated cursor effects and settings for animation speed, cursor count, and sound. This page provides setup instructions, troubleshooting, and contact information.</p>
+<h2>1. Enable the Extension</h2>
+<ol>
+<li>Open Swarm Cursors and use Studio to explore the animation preview and settings.</li>
+<li>Enable Swarm Cursors in Safari's extension settings for your device:
+<ul>
+<li>iPhone / iPad: Find Safari in Settings, then select Extensions. On newer system versions, Safari settings are under Apps.</li>
+<li>Mac: Open Safari, choose Settings (or Preferences on earlier versions), then select Extensions.</li>
+<li>Apple Vision Pro: Find Safari in Settings, then select Extensions.</li>
+</ul>
+</li>
+<li>Grant access to the websites where you want to use the animation. You can authorize individual websites without granting access to all websites.</li>
+<li>Confirm that “Draw on every page” is enabled in Studio, then open or reload a supported webpage in Safari.</li>
+</ol>
+<p>The in-app Guide provides platform-specific instructions. Setting names and locations may vary by system version.</p>
+<h2>2. Animation Controls and Settings</h2>
+<p><strong>Enable or disable:</strong> Toggle “Draw on every page” in Studio or use the Safari extension button. On Mac, you can also use Option-Shift-S. These controls operate the same global switch and may affect multiple tabs with website access. The toolbar badge shows ON or OFF.</p>
+<p><strong>Speed and cursor count:</strong> Choose 1×, 2×, or 3× animation speed. Cursor allocation can be automatic or set manually to 6–100. Higher counts increase processing demands; adjust them to suit your device.</p>
+<p><strong>Sound:</strong> Enable or disable sound in Studio. Audio is synthesized locally and does not require microphone access. Safari's audio playback rules may require a click or tap on some pages before sound can play.</p>
+<p><strong>Replay:</strong> After changing settings, reload the webpage to view the animation from the beginning.</p>
+<h2>3. Frequently Asked Questions</h2>
+<h3>The animation does not appear</h3>
+<p>Check that the extension is enabled in Safari, access is granted for the current website, and “Draw on every page” is on. Then reload the webpage. Safari internal pages and other restricted content do not support the extension.</p>
+<h3>Page content is temporarily hidden</h3>
+<p>The animation initially hides page elements, then progressively reveals them as the cursors draw. This is part of the webpage rebuild effect. To view the page immediately, turn off the animation switch. If visibility is not restored, disable the extension for that website and reload.</p>
+<h3>Some content is missing or the animation is slow</h3>
+<p>Page structure, lazy loading, embedded content, and device performance can affect animation coverage and completion time. Try reducing the cursor count and reloading. You can temporarily disable the animation on pages where completing an action is the priority.</p>
+<h3>Does the animation affect webpage interaction?</h3>
+<p>The animation changes the visibility of original page elements, but interactions on complex pages and some touch gestures may be affected. If clicking, typing, or zooming behaves unexpectedly, disable the animation before continuing.</p>
+<h3>Does the app support live collaboration or screen recording?</h3>
+<p>The multiple cursors are simulated animations, not other users accessing or editing the page. The app does not provide live collaboration or built-in screen recording. To record a presentation, use system recording tools.</p>
+<h3>Which devices are supported?</h3>
+<p>Swarm Cursors supports iPhone, iPad, Mac, and Apple Vision Pro, with iOS / iPadOS 15, macOS 11, or visionOS 1.0 and later. Before downloading, check the current version's compatibility information on the App Store.</p>
+<h3>Is an account required, and is webpage content uploaded?</h3>
+<p>No registration or sign-in is required. Animation and sound are processed locally, and webpage content is not uploaded to the developer. See the <a href="Privacy.html">Privacy Policy</a> for details.</p>
+<h2>4. Feedback and Support</h2>
+<p>For technical support or suggestions, email <a href="mailto:erico525@163.com">erico525@163.com</a>.</p>
+<p>To help diagnose issues, include your device model, system version, app version, steps to reproduce the problem, and a publicly accessible example webpage if available. Screenshots or recordings can help; remove account information, passwords, verification codes, and private page content before sending them.</p>
+<p>We use feedback to investigate webpage compatibility, animation, and stability issues and to improve the experience.</p>
+</section>
+<section data-language="zh-CN" lang="zh-CN">
+<h1>技术支持</h1>
+<p>Swarm Cursors 是面向 Safari 的网页动画扩展，提供多光标协同绘制效果，以及动画速度、光标数量和声音设置。本页面提供启用说明、常见问题与反馈方式。</p>
+
+<h2>一、启用扩展</h2>
+<ol>
+    <li>打开 Swarm Cursors，通过「演播室」查看动画预览与设置。</li>
+    <li>按照设备类型，在 Safari 的扩展设置中启用 Swarm Cursors：
+        <ul>
+            <li>iPhone / iPad：在系统「设置」中找到 Safari，进入「扩展」。较新系统的 Safari 设置位于「App」中。</li>
+            <li>Mac：打开 Safari，进入「设置」或较早版本中的「偏好设置」，选择「扩展」。</li>
+            <li>Apple Vision Pro：在系统「设置」中找到 Safari，进入「扩展」。</li>
+        </ul>
+    </li>
+    <li>为需要使用动画的网站授予访问权限。您可以按网站选择授权范围，无需为全部网站开放访问。</li>
+    <li>确认「演播室」中的「在所有网页上绘制」已开启，然后在 Safari 中打开或重新载入受支持的网页。</li>
+</ol>
+<p>应用内的「开启指南」提供对应平台的操作说明。系统版本不同，设置入口的名称与位置可能有所差异。</p>
+
+<h2>二、动画控制与设置</h2>
+<p><strong>开启或关闭：</strong>在「演播室」中切换「在所有网页上绘制」，或使用 Safari 扩展按钮。Mac 还可使用 Option-Shift-S。上述入口控制同一个全局开关，可能同时影响已获访问权限的多个标签页；工具栏徽章以 ON / OFF 表示状态。</p>
+<p><strong>速度与数量：</strong>支持 1×、2×、3× 动画速度。光标数量可自动分配，也可手动设置为 6–100 个。较高数量会增加运算负担，您可以根据设备性能适当调整。</p>
+<p><strong>声音：</strong>可在「演播室」开启或关闭。音效由设备本地合成，不需要麦克风权限。受 Safari 音频播放机制影响，部分页面可能需要先进行点击或轻点操作才能播放声音。</p>
+<p><strong>重新查看：</strong>设置调整后，可重新载入网页，从头查看动画效果。</p>
+
+<h2>三、常见问题</h2>
+<h3>网页未出现动画</h3>
+<p>请检查 Safari 是否已启用扩展、当前网站是否已授权，以及「在所有网页上绘制」是否开启。确认后重新载入网页。Safari 内部页面及其他受限制内容不支持扩展运行。</p>
+
+<h3>页面内容暂时不可见</h3>
+<p>动画会先隐藏页面元素，再随光标绘制逐步显示，这是网页重建效果的一部分。如需立即查看页面，请关闭绘制开关；如果页面未恢复，请停用该网站上的扩展并重新载入。</p>
+
+<h3>部分内容未完整呈现或动画较慢</h3>
+<p>网页结构、延迟加载、嵌入内容及设备性能均可能影响动画范围与完成时间。可减少光标数量后重新载入。对于需要优先完成操作的页面，可暂时关闭动画。</p>
+
+<h3>动画是否影响网页操作</h3>
+<p>动画基于原网页元素进行显示处理，但复杂页面的交互及部分触控手势可能受到影响。如遇点击、输入或缩放异常，请关闭动画后继续操作。</p>
+
+<h3>是否支持多人协作或屏幕录制</h3>
+<p>多个光标属于模拟动画，不代表其他用户正在访问或编辑页面。应用不提供多人协作或内置录屏功能；如需录制展示内容，请使用系统提供的录屏工具。</p>
+
+<h3>支持哪些设备</h3>
+<p>Swarm Cursors 支持 iPhone、iPad、Mac 与 Apple Vision Pro，系统要求为 iOS / iPadOS 15、macOS 11、visionOS 1.0 或更高版本。下载前请以 App Store 中当前版本的兼容性信息为准。</p>
+
+<h3>是否需要账号，是否上传网页内容</h3>
+<p>无需注册或登录。动画与音效在设备本地处理，网页内容不会上传给开发者。具体信息处理方式请参阅<a href="Privacy.html">隐私政策</a>。</p>
+
+<h2>四、问题反馈</h2>
+<p>如需技术支持或提交建议，请发送邮件至：<a href="mailto:erico525@163.com">erico525@163.com</a>。</p>
+<p>为便于定位问题，请尽量提供设备型号、系统版本、应用版本、问题发生步骤，以及可公开访问的示例网页地址。截图或录屏可作为补充材料，请在发送前移除账号、密码、验证码及私人页面内容。</p>
+<p>我们将根据反馈排查网页兼容性、动画表现与稳定性问题，并持续完善使用体验。</p>
+</section>
+</main>
+<footer class="footer">Copyright © 2026 Erico. All Rights Reserved.</footer>
+<script>
+    const languageToggle = document.getElementById("language-toggle");
+    function updateLanguage(language) {
+        document.documentElement.lang = language;
+        const chinese = language === "zh-CN";
+        document.title = document.querySelector('[data-language="' + language + '"] h1').textContent;
+        languageToggle.textContent = chinese ? "English" : "简体中文";
+        languageToggle.lang = chinese ? "en" : "zh-CN";
+        languageToggle.setAttribute("aria-label", chinese ? "切换到 English" : "Switch to 简体中文");
+    }
+    languageToggle.addEventListener("click", () => {
+        updateLanguage(document.documentElement.lang === "en" ? "zh-CN" : "en");
+    });
+    updateLanguage(document.documentElement.lang);
+</script>
+</body>
+</html>

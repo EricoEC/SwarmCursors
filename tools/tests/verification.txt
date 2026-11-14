@@ -1,0 +1,69 @@
+Real native IPC
+PASS real cross-process App settings -> native: speed 3, agents 9, OFF
+PASS real cross-process App update -> native settings: speed 1, agents 7, ON
+
+Live config polling
+PASS visibility-transition container fully drawn without hover
+PASS polled native settings apply OFF/ON, speed 3 and manual 9 to the running page
+PASS manual-to-auto reduces to <=6 workers and 3 on idle
+
+Single-owner duplication chain
+PASS images: one master, five dup and swaps; dependency order and preview cleanup
+PASS new sibling reuses an already completed master
+PASS source removal and target mutation during duplication recover without hidden content or orphan previews
+PASS cards: one master, five dup and swaps, five text edits; dependency order and preview cleanup
+PASS new sibling reuses an already completed master
+PASS source removal and target mutation during duplication recover without hidden content or orphan previews
+
+Mobile editing
+PASS rapid live suggestions settle without hover; composition events preserve focus, selection and visibility
+PASS framework className replacement keeps completed rows visible and never hides a focused editor
+PASS drawn contenteditable accepts new text nodes without cursor jobs
+PASS a newly appearing input still requires its cursor appearance task
+
+Scrolling
+PASS active text cursor and box track inner scroll, fixed panel page scroll, and panel movement without drift
+PASS anchored gesture still completes its original task
+PASS input appearance cursor stays attached during nested scroll
+
+General / manual 100 workers
+PASS initial content and idle, 100 actual rendered and working cursors
+PASS existing popup becomes visible through cursor task after idle
+PASS inserted popup subtree, all list items complete
+PASS changed text invalidates old completion
+PASS scrolling discovers and draws below-fold content
+PASS open shadow root
+PASS nested overflow scroller: clipped rows wait for scrolling
+PASS input value changes stay native without replaying appearance
+PASS image layout placeholder waits for decoded image
+PASS 50 queued items with 6 workers, no dropped busy work
+PASS display:contents text has a Range-based drawing job
+PASS no timed release while all cursor work is paused
+PASS Escape passthrough and no-scroll page startup
+PASS toolbar OFF/ON; every commit owned by active cursor {"violations":[],"workers":100,"commits":233}
+
+Switch races
+PASS toolbar OFF persists to native state
+PASS stale native settings cannot undo toolbar click
+PASS rapid single clicks serialize despite an unresponsive tab
+PASS typed App pushes synchronize; stale app launch cannot restore ON
+PASS native unavailable preserves cached config and manual 100 workers
+PASS service-worker restart retains OFF
+
+Performance, 3000 DOM
+{"nodes":3000,"workers":100,"frames":239,"stepP95Ms":1.0000000000004547,"stepMaxMs":15,"styleReads":303,"collectMs":[14,14.000000000000455,13.99999999999909]}
+
+Performance, 20000 DOM
+{"nodes":20000,"workers":100,"frames":219,"stepP95Ms":1,"stepMaxMs":78.00000000000023,"styleReads":303,"collectMs":[78.00000000000023,77,78]}
+
+Google public page via isolated preview: six footer entries visible; ten nonzero-size suggestion rows; missing suggestion text zero; input q remains focused. No hover. Background RAF was advanced explicitly for DOM verification; not a natural playback timing test.
+macOS: BUILD SUCCEEDED, CODE_SIGNING_ALLOWED=NO
+macOS content/swarm.js matches source SHA256 bceeb2e937f06cd2e4fb93b230c13bb1f1ca2cdf3f1754d523ccc8680fcbba93
+macOS content/mask.js matches source SHA256 39795228a0f466fa6c3d7ce67a40bc1b48122bdc2ce2a5304ba35ea103a1e98b
+macOS background.js matches source SHA256 674594f393f08ddcd81f66237d8ec0dd83c4c5f3ca18a6b08caef63f1e07d5c9
+macOS manifest.json matches source SHA256 40f326df6a641bfb854013d54f0f7fbf6167eac69a4e40bc65b7a9a31f69ade1
+iOS Simulator: BUILD SUCCEEDED, CODE_SIGNING_ALLOWED=NO
+iOS Simulator content/swarm.js matches source SHA256 bceeb2e937f06cd2e4fb93b230c13bb1f1ca2cdf3f1754d523ccc8680fcbba93
+iOS Simulator content/mask.js matches source SHA256 39795228a0f466fa6c3d7ce67a40bc1b48122bdc2ce2a5304ba35ea103a1e98b
+iOS Simulator background.js matches source SHA256 674594f393f08ddcd81f66237d8ec0dd83c4c5f3ca18a6b08caef63f1e07d5c9
+iOS Simulator manifest.json matches source SHA256 40f326df6a641bfb854013d54f0f7fbf6167eac69a4e40bc65b7a9a31f69ade1

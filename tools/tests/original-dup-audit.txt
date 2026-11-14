@@ -1,0 +1,6 @@
+{"case":"same-images","counts":{"image":1,"dup":5},"groups":[{"tag":"img","cls":"photo","members":6}],"copies":[{"id":1,"deps":[0]},{"id":2,"deps":[0]},{"id":3,"deps":[0]},{"id":4,"deps":[0]},{"id":5,"deps":[0]}]}
+{"case":"different-images","counts":{"image":1,"dup":5,"swap":5},"groups":[{"tag":"img","cls":"photo","members":6}],"copies":[{"id":1,"deps":[0]},{"id":3,"deps":[0]},{"id":5,"deps":[0]},{"id":7,"deps":[0]},{"id":9,"deps":[0]}]}
+{"case":"actual-original-run","owners":[{"type":"image","cursor":0},{"type":"dup","cursor":0},{"type":"dup","cursor":1},{"type":"dup","cursor":2},{"type":"dup","cursor":3},{"type":"dup","cursor":4},{"type":"swap","cursor":0},{"type":"swap","cursor":1},{"type":"swap","cursor":3},{"type":"swap","cursor":2},{"type":"swap","cursor":4}]}
+{"case":"different-classes","counts":{"image":6},"groups":[],"copies":[]}
+{"case":"repeated-cards","counts":{"rect":1,"image":1,"text":1,"dup":5,"swap":5,"edit":5},"groups":[{"tag":"article","cls":"card","members":6}],"copies":[{"id":3,"deps":[0,1,2]},{"id":6,"deps":[0,1,2]},{"id":9,"deps":[0,1,2]},{"id":12,"deps":[0,1,2]},{"id":15,"deps":[0,1,2]}]}
+PASS original capture: master/dup/swap/edit task chains and independent duplication dependencies confirmed

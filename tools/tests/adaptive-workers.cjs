@@ -1,0 +1,31 @@
+const fs=require('fs'),path=require('path'),assert=require('assert/strict');
+const {webkit}=require('/Users/erico/.nvm/versions/node/v22.22.1/lib/node_modules/playwright');
+(async()=>{const b=await webkit.launch();try{
+ const p=await b.newPage({viewport:{width:1000,height:800}});
+ await p.addInitScript(()=>{window.__listeners=[];window.browser={runtime:{sendMessage:(m,cb)=>{const s={autoAgents:true,agents:24,speed:1,sound:false,enabled:true};cb?.(s);return Promise.resolve(s)},onMessage:{addListener:f=>__listeners.push(f)}},storage:{local:{get:async()=>({})}}};});
+ await p.goto('data:text/html,'+encodeURIComponent('<meta charset="utf-8"><style>p{display:inline-block;width:110px;height:24px;margin:2px}</style>'+Array.from({length:90},(_,i)=>`<p class="unique${i}">Independent task ${i}</p>`).join('')));
+ const root=path.resolve(__dirname,'../../web-extension/content');
+ for(const name of ['mask','swarm'])await p.addScriptTag({content:fs.readFileSync(path.join(root,name+'.js'),'utf8')});
+ await p.waitForFunction(()=>__swarmRebuild.app?.engine.started);
+ const initialCrew=await p.evaluate(()=>__swarmRebuild.app.engine.cursors.length);
+ await p.evaluate(()=>{window.__peak=0;const sample=()=>{const E=__swarmRebuild.app?.engine;if(E)__peak=Math.max(__peak,E.cursors.length);window.__sample=requestAnimationFrame(sample)};sample()});
+ await p.waitForFunction(()=>__swarmRebuild.app.complete,{},{timeout:30000});
+
+ const counts=await p.evaluate(()=>({peak:__peak,idle:__swarmRebuild.app.engine.cursors.length}));
+ assert(counts.peak>=4,JSON.stringify(counts));assert(counts.peak<=16,JSON.stringify(counts));assert.equal(counts.idle,counts.peak);assert(counts.peak>initialCrew,JSON.stringify({initialCrew,...counts}));
+ console.log('PASS auto estimates initial crew, reinforces sustained backlog, and keeps peak crew in cruise:',JSON.stringify(counts));
+ await p.evaluate(()=>{const popup=document.createElement('aside');popup.id='later';popup.style='position:fixed;top:10px;left:10px;background:white';popup.innerHTML=Array.from({length:20},(_,i)=>`<div>Later independent row ${i}</div>`).join('');document.body.append(popup)});
+ await p.waitForFunction(()=>[...document.querySelectorAll('#later div')].every(e=>e.classList.contains('__swarm-drawn')),{},{timeout:30000});
+ assert(await p.evaluate(()=>__swarmRebuild.app.engine.cursors.length)>=initialCrew);
+ console.log('PASS later popup completes and retains the crew');
+ await p.evaluate(()=>{const E=__swarmRebuild.app.engine;for(let i=0;i<3;i++)__swarmNative.frameCost(E,12)});
+ assert(await p.evaluate(()=>__swarmRebuild.app.engine.nativeBudget<16));
+ assert(await p.evaluate(()=>__swarmRebuild.app.engine.cursors.length)>=counts.idle);
+ console.log('PASS expensive frames reduce concurrency without removing cruise cursors');
+ await p.evaluate(()=>{__swarmApplyConfig({agents:30,autoAgents:false,speed:1,sound:false,settingsUpdatedAt:100});});
+ await p.waitForFunction(()=>__swarmRebuild.app.engine.cursors.length===30,{},{timeout:3000});
+ console.log('PASS manual count remains exactly 30');
+ const before=await p.evaluate(()=>{const m=__swarmMask,collect=m.collect;window.__idleScans=0;m.collect=function(){__idleScans++;return collect()};return __idleScans});
+ await p.waitForTimeout(3500);assert.equal(await p.evaluate(()=>__idleScans),before);
+ console.log('PASS completed idle page performs no heartbeat DOM rescans');
+}finally{await b.close()}})().catch(e=>{console.error(e);process.exit(1)});
