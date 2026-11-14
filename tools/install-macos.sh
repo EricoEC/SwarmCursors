@@ -24,9 +24,16 @@ for line in subprocess.check_output(['ps','-axo','pid=,comm='],text=True).splitl
   os.kill(int(parts[0]),signal.SIGTERM)
 registered=subprocess.check_output(['pluginkit','-m','-A','-D','-v','-i','com.Erico.SwarmCursors.Extension'],text=True)
 apps={installed,built}
+# Any other registration of this identifier is stale: drop it even if the bundle
+# is already gone, otherwise pluginkit keeps advertising a second copy and the
+# installed extension is not the one Safari picks up.
 for line in registered.splitlines():
  match=re.search(r'(/[^\n]+\.appex)',line)
- if match:apps.add(Path(match.group(1)).parents[2].resolve())
+ if not match:continue
+ path=match.group(1)
+ if path.startswith(str(installed)):continue
+ subprocess.run(['pluginkit','-r',path],check=False)
+ if Path(path).exists():apps.add(Path(path).parents[2].resolve())
 ls='/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister'
 stamp=datetime.datetime.now().strftime('%Y%m%d-%H%M%S')
 for i,old in enumerate(sorted(apps)):

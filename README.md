@@ -59,6 +59,6 @@ node tools/tests/ancestor-handoff.cjs
 node tools/tests/switch-regression.mjs
 ```
 
-## 致谢与授权
+## 致谢
 
-动画引擎改编自 [DhvanilPatel/swarm-cursors](https://github.com/DhvanilPatel/swarm-cursors)，其创意来自 [Joel Califa 的 Swarm](https://califa.github.io/swarm-site/)。上游仓库标注 `License: None yet.`，因此本项目仅作本地研究与自用，不用于再发布或商业分发。
+动画灵感来自 Joel Califa 的 Swarm。

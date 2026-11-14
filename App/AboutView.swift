@@ -3,7 +3,7 @@ import SwiftUI
 struct AboutView: View {
     @Environment(\.openURL) private var openURL
 
-    /// Swap this one line for your own repository when you publish.
+    /// Project repository.
     private let repository = URL(string: "https://github.com/EricoEC/SwarmCursors")!
 
     private var version: String {
@@ -52,7 +52,6 @@ struct AboutView: View {
 
                 GlassGroup(spacing: 12) {
                     VStack(spacing: Layout.gap) {
-                        card("person.2", "about.credit.title", "about.credit.body")
                         card("lock", "about.privacy.title", "about.privacy.body")
                     }
                 }

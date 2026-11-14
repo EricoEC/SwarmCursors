@@ -40,9 +40,7 @@
 "guide.vision.step4.title" = "管理播放状态";
 "guide.vision.step4.body" = "开启后，网页自动播放动画。通过 App 或 Safari 扩展按钮切换开关。";
 "about.version" = "版本 %@";
-"about.tagline" = "Erico 开发";
-"about.credit.title" = "来源与致谢";
-"about.credit.body" = "动画设计与引擎改编自 Joel Califa 和 Dhvanil Patel 的作品。";
+"about.tagline" = "由 Erico 开发";
 "about.privacy.title" = "隐私";
 "about.privacy.body" = "页面内容在设备本地处理，不上传至服务器。扩展仅在获准访问的网页中运行。";
-"about.github" = "查看 GitHub 仓库";
+"about.github" = "我的 GitHub";

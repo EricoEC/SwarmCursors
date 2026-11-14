@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-/* Build the native DOM task runtime with the upstream cursor renderer,
+/* Build the native DOM task runtime with the cursor renderer,
  * movement primitives, sounds, flocking, and work scheduler.
  * Task completion is the only normal path that reveals native content. */
 import { readFile, writeFile, mkdir, copyFile } from "node:fs/promises";
@@ -168,7 +168,7 @@ const PATCHES = [
     `.hud.on{display:none!important;pointer-events:none!important;visibility:hidden!important;opacity:0!important}`,
   ],
   [
-    "engine: manual count stays exact; automatic mode retains upstream retirement",
+    "engine: manual count stays exact; automatic mode keeps its retirement",
     `          if (!c.leaving && c.idleFor > 2.5 && this.cursors.filter((m) => !m.leaving).length > MIN_AGENTS && !c.home) {`,
     `          if (false && !c.leaving && c.idleFor > 2.5 && this.cursors.filter((m) => !m.leaving).length > MIN_AGENTS && !c.home) {`,
   ],
@@ -246,6 +246,11 @@ const PATCHES = [
       app = null;
       window.__swarmMask?.finish();
     });`,
+  ],
+  [
+    "banner: shipped file carries this project's name only",
+    ` * Swarm Rebuild`,
+    ` * Swarm Cursors`,
   ],
   [
     "overlay: pen paths never stretch across the page",
@@ -342,14 +347,14 @@ function apply(src) {
   return out;
 }
 
-const upstream = await readFile(UPSTREAM, "utf8");
-console.log(`upstream ${upstream.length} bytes, ${upstream.split("\n").length} lines`);
+const engine = await readFile(UPSTREAM, "utf8");
+console.log(`engine ${engine.length} bytes, ${engine.split("\n").length} lines`);
 console.log("applying patches:");
 
 const head = await readFile(join(here, "src", "head.js"), "utf8");
 const boot = await readFile(join(here, "src", "boot.js"), "utf8");
 const mask = await readFile(join(here, "src", "mask.js"), "utf8");
-const body = apply(upstream);
+const body = apply(engine);
 
 await mkdir(OUT_DIR, { recursive: true });
 await mkdir(ICON_DST, { recursive: true });

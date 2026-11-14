@@ -41,8 +41,6 @@
 "guide.vision.step4.body" = "Pages animate automatically when enabled. Use the app or Safari extension button to toggle.";
 "about.version" = "Version %@";
 "about.tagline" = "Developed by Erico";
-"about.credit.title" = "Credits";
-"about.credit.body" = "Animation design and engine adapted from work by Joel Califa and Dhvanil Patel.";
 "about.privacy.title" = "Privacy";
 "about.privacy.body" = "Page content is processed on your device and is not uploaded to a server. The extension runs only on authorized websites.";
-"about.github" = "View on GitHub";
+"about.github" = "GitHub";

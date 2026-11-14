@@ -360,8 +360,8 @@
       if(manual) {
         while(E.cursors.length<cfg.maxAgents){const c=E.makeCursor(E.vp.sx+E.vp.vw/2,E.vp.sy+E.vp.vh/2);c.follow=!E.started||E.flocking;E.cursors.push(c)}
       }
-      // Returning from a larger manual count obeys the upstream automatic
-      // ceiling; ordinary automatic spawning/retirement is otherwise untouched.
+      // Returning from a larger manual count goes back to the automatic
+      // ceiling; ordinary spawning/retirement is otherwise untouched.
       for(let i=E.cursors.length-1;E.cursors.length>cfg.maxAgents&&i>=0;i--)if(!E.cursors[i].task)E.cursors.splice(i,1);
       if(!manual) {
         const key=[cfg.minAgents,cfg.maxAgents,cfg.introAgents].join(':');
@@ -415,7 +415,7 @@
 })();
 
 /*
- * Swarm Rebuild
+ * Swarm Cursors
  *
  * Snapshots the current page into a blueprint (boxes, text blocks, media,
  * borders, repeated components), blanks the page, then lets a swarm of
