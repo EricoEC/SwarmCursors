@@ -55,14 +55,14 @@
 
 /* Begin PBXFileReference section */
 		14274D7AA3CC578CF5AC9B1D /* manifest.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = manifest.json; sourceTree = "<group>"; };
-		1900CE2739E1B823A073EEFE /* SwarmCursors.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; name = SwarmCursors.app; path = "Swarm Cursors.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1900CE2739E1B823A073EEFE /* SwarmCursors.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = SwarmCursors.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3D9353851186FE42341E46E2 /* Design.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Design.swift; sourceTree = "<group>"; };
-		4E505C3CB693574938CD33E0 /* SwarmCursorsExtension.appex */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = "wrapper.extensionkit-extension"; name = SwarmCursorsExtension.appex; path = "Swarm Cursors Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		4E505C3CB693574938CD33E0 /* SwarmCursorsExtension.appex */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = "wrapper.app-extension"; path = SwarmCursorsExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		5AFC90FC6EB788D77B389045 /* _locales */ = {isa = PBXFileReference; lastKnownFileType = folder; name = _locales; path = "web-extension/_locales"; sourceTree = SOURCE_ROOT; };
 		5B8F4F0B7849CFA47E4B6B15 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		617F9856A903349475D7E387 /* AboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
 		66745079928602E1B20C02FA /* SwarmCursorsExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SwarmCursorsExtension.entitlements; sourceTree = "<group>"; };
-		6E97FCFF6639DD5F30234483 /* AppIcon.icon */ = {isa = PBXFileReference; lastKnownFileType = folder.iconcomposer.icon; path = AppIcon.icon; sourceTree = "<group>"; };
+		6E97FCFF6639DD5F30234483 /* AppIcon.icon */ = {isa = PBXFileReference; lastKnownFileType = wrapper.icon; path = AppIcon.icon; sourceTree = "<group>"; };
 		70058C8194E05A621306698F /* SwarmCursorsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwarmCursorsApp.swift; sourceTree = "<group>"; };
 		7016DA6B204BE4881967D596 /* SwarmCursors.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SwarmCursors.entitlements; sourceTree = "<group>"; };
 		7CD518DF1FECFFA3AFE155C5 /* Compat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Compat.swift; sourceTree = "<group>"; };
@@ -94,10 +94,10 @@
 		7A14541F04CEB5B93AE26568 = {
 			isa = PBXGroup;
 			children = (
-				6E97FCFF6639DD5F30234483 /* AppIcon.icon */,
 				A5309AB2B0AB0AD0B603AEA0 /* App */,
 				E79A5419F22711B77FC615F8 /* Extension */,
 				E6D904A4F3B6C010DD232F06 /* web-extension */,
+				6E97FCFF6639DD5F30234483 /* AppIcon.icon */,
 				B2B0519161B67D2B9999FA2C /* Products */,
 			);
 			sourceTree = "<group>";
@@ -413,7 +413,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 3;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = Q42CQ5VP5A;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -484,7 +484,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 3;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = Q42CQ5VP5A;
 				ENABLE_NS_ASSERTIONS = NO;
